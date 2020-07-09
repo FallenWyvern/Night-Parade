@@ -50,13 +50,13 @@ function DoTheThing(){
     var outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
     
     var outputFeatures = npFeatures[Math.floor(Math.random() * npFeatures.length)];
-    outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)];
-    outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
-    outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
-    outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)];
-    outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)];
-    outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];
-    outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
+    //outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)];
+    //outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
+    //outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
+    //outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)];
+    //outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)];
+    //outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];
+    //outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
     
     $('#test').append(Features());          
   });   
