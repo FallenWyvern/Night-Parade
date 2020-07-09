@@ -1,7 +1,7 @@
 <stat-block>
     <creature-heading>
       <h1>Acolyte</h1>
-      <h2>Medium humanoid (any race), any alignment</h2>
+      <h2><span id='mmSize'>Medium</span> humanoid (any race), any alignment</h2>
     </creature-heading>
 
     <top-stats>
