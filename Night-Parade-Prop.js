@@ -7,3 +7,11 @@ var npSkinPattern = [ "alternating stripes", "back of one color, softer color on
 var npSkinColors = [ "red", "orange", "yellow", "green", "blue", "indigo", "purple", "white", "black", "natural color of their race"];
 var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", "wisdom", "charism"];
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
+
+$(document).ready(function(){
+  var outputString = "";
+  outputString += npSize[Math.Floor(Math.Random() * npSize.length)];
+  
+  var element = document.getElementById("test");
+  element.appendChild(outputString);
+}
