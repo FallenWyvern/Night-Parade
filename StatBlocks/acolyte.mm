@@ -15,16 +15,17 @@
       </property-line>
       <property-line>
         <h4>Speed</h4>
-        <p>30 ft.</p>
+        <p id='mmSpeed'><span id='mmBaseSpeed'>30</span> ft.</p>        
+        </span>
       </property-line>
-
+      <div id='mmStats'>
       <abilities-block data-str="10"
                        data-dex="10"
                        data-con="10"
                        data-int="10"
                        data-wis="14"
-                       data-cha="11" id='mmStats'></abilities-block>
-
+                       data-cha="11"></abilities-block>
+      </div>
       <property-line>
         <h4>Skills</h4>
         <p>Medicine +4, Religion +2</p>
@@ -43,16 +44,16 @@
       </property-line>
     </top-stats>
 
-    <property-block>
-        <div id="mmAbilities">
-            <h4>Spellcasting.</h4>
-            <p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is 
-            Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following 
-            cleric spells prepared:</p>
-            <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-            <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>
-        </div>
-    </property-block>
+    <div id = 'mmAbilities'>
+        <property-block>        
+                <h4>Spellcasting.</h4>
+                <p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is 
+                Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following 
+                cleric spells prepared:</p>
+                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
+                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
+        </property-block>        
+    </div>
     
     <h3>Actions</h3>
 
