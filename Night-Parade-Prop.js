@@ -1,5 +1,5 @@
 var npSize = [ "Small", "Small", "Medium", "Medium", "Medium", "Large" ];
-var npFeatures = [ "horns on head", "fangs or tusks", "oversized, pointed ears", "solid-colored eyes", "animal eyes", "furry/hairless body", "spinal ridges", "covered in feathers", "non-prehensile tail", "covered in scales", "clawed hands", "amorphous body", "unusually powerful smell", "extra set of smaller arms", "centaur-like body shape", "insect-like chitinous carapace", "multiple unified voices", "an extra head or face" ];
+var npFeatures = [ "horns on head", "fangs/tusks", "oversized, pointed ears", "solid-colored eyes", "animal eyes", "furry/hairless body", "spinal ridges", "covered in feathers", "non-prehensile tail", "covered in scales", "clawed hands", "amorphous body", "unusually powerful smell", "extra set of smaller arms", "centaur-like body shape", "insect-like chitinous carapace", "multiple unified voices", "an extra head/face" ];
 var npLocomotion = [ "swims", "walks", "walks", "walks", "walks", "walks", "oozes", "flies", "multiple", "multiple"];
 var npSkinThickness = [ "normal", "thick", "waxy", "woody", "stoney", "metallic" ];
 var npAttackForm = [ "claws", "claws", "claws", "bite", "bite", "bite", "tentacle", "tentacle", "tentacle", "extra arm/leg", "extra arm/leg", "multiple" ];
@@ -44,23 +44,65 @@ var mmCRValues = {
     "30":["9", "19", "14", "155000"]
  };
 
-$(document).ready(function(){  
+function DoTheThing(){  
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
-    /* When load is done */
-    var outputString = "";
+    /* When load is done */    
     var outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
-    outputString += outputSize + '</br>';
-
-    outputString += npFeatures[Math.floor(Math.random() * npFeatures.length)]+ '</br>';
-    outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)]+ '</br>';
-    outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)]+ '</br>';
-    outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)]+ '</br>';
-    outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)]+ '</br>';
-    outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)]+ '</br>';
-    outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)]+ '</br>';
+    
+    var outputFeatures = npFeatures[Math.floor(Math.random() * npFeatures.length)];
+    outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)];
+    outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
+    outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
+    outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)];
+    outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)];
+    outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];
     outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
     
-    $('#test').append(outputString);  
-    $('#mmSize').text(outputSize);    
+    $('#test').append(Features());          
   });   
-});
+};
+
+function Features(){
+    var returnString = FeaturesCause();
+    returnString += "this member of the night parade has ";
+    returnString += npFeatures[Math.floor(Math.random() * npFeatures.length)];
+    return returnString;
+}
+
+function Abilities(){
+    var returnString = "";
+    
+    if (outputSize == "Small"){
+        $('#mmAbilities').append("<h4>Small Build.</h4><p>The " + $('#mmName').text + 
+        " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p>");
+        $('#mmStats').attr("data-str") = ($('#mmStats').attr("data-str") - 2);
+    };
+
+    if (outputSize == "Large"){
+        $('#mmAbilities').append("<h4>Large Build.</h4><p>The " + $('#mmName').text + 
+        " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p>");
+        $('#mmStats').attr("data-str") = ($('#mmStats').attr("data-str") + 2);
+    };
+
+    return returnString;
+}
+
+function FeaturesCause(){
+    var causes = [
+        "Due to it's time in the dream realms, ",
+        "After having wandered for too long in the alleyways of Nod, ",
+        "Ravaged by miscast magics, ",
+        "Twisted by the black ichor blood of a maelephant, ",
+        "Cursed by " + NightmareCourt() + " of the Nightmare Court, "
+    ];
+
+    return causes[Math.floor(Math.random() * causes.length)];
+}
+
+function NightmareCourt(){
+    var courtMembers = [
+        "The Nightmare Man", "Hypnos", "Mullonga", "The Ghost Dancer", "Morpheus", "The Rainbow Serpent";
+    ];
+
+    return courtMembers[Math.floor(Math.random() * courtMembers.length)];
+}

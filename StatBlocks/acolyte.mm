@@ -1,7 +1,7 @@
 <stat-block>
     <creature-heading>
-      <h1>Acolyte</h1>
-      <h2><span id='mmSize'>Medium</span> humanoid (any race), any alignment</h2>
+      <h1><span id='mmName'>Acolyte</span></h1>
+      <h2><span id='mmSize'>Medium</span> humanoid (<span id='mmRace'>any race</span>), any alignment</h2>
     </creature-heading>
 
     <top-stats>
@@ -23,7 +23,7 @@
                        data-con="10"
                        data-int="10"
                        data-wis="14"
-                       data-cha="11"></abilities-block>
+                       data-cha="11" id='mmStats'></abilities-block>
 
       <property-line>
         <h4>Skills</h4>
@@ -44,12 +44,14 @@
     </top-stats>
 
     <property-block>
-      <h4>Spellcasting.</h4>
-      <p>Spellcasting. The acolyte is a 1st-level spellcaster. Its spellcasting ability is 
-      Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following 
-      cleric spells prepared:</p>
-      <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-      <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>
+        <div id="mmAbilities">
+            <h4>Spellcasting.</h4>
+            <p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is 
+            Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following 
+            cleric spells prepared:</p>
+            <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
+            <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>
+        </div>
     </property-block>
     
     <h3>Actions</h3>
