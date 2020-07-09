@@ -108,21 +108,20 @@ function Locomotion(){
         if (element == "walking") { creatureBaseSpeed += 10; $('#mmBaseSpeed').text(creatureBaseSpeed);}
     });
 
-    list.forEach((element) => {
-        console.log(element)            
+    var fly = "";
+    list.forEach((element) => {              
         if (element == "flying") {             
             if (flying){
-                $('#mmSpeed').text().replace(", fly " + creatureBaseSpeed + " ft.,", ", fly " + creatureBaseSpeed + " ft. (hover)");
+                fly = ", fly " + creatureBaseSpeed + " ft. (hover)";
             } else {
-                $('#mmSpeed').append(", fly " + creatureBaseSpeed + " ft.");
-            }        
-
+                fly = ", fly " + creatureBaseSpeed + " ft.";
+            }                    
             flying = true;               
         }
     });
+    $('#mmSpeed').append(fly);
 
-    list.forEach((element) => {
-        console.log(element)            
+    list.forEach((element) => {                 
         if (element == "swimming") {             
             if (swimming){
                 if (!$('#mmAbilities').text().includes("Amphibious")){
@@ -137,8 +136,7 @@ function Locomotion(){
         }
     });
 
-        list.forEach((element) => {
-        console.log(element)            
+        list.forEach((element) => {                  
         if (element == "oozing") {             
             if (oozing){
                 if (!$('#mmAbilities').text().includes("Amorphous")){
