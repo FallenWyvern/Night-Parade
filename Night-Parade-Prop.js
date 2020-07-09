@@ -95,29 +95,35 @@ function Abilities(){
     return returnString;
 }
 
-function Locomotion(){
+function Locomotion(){    
     var returnString = "walking";
     var walking = true;
     var flying = false;
     var swimming = false;
     var oozing = false;
+    var amorphous = false;    
+    var spiderclimb = false;
+    var amphibious = false;
 
     var list = LocomotionList(); 
+    list.forEach((element) => {                 
+        console.log(element + " ");
+    });
 
     list.forEach((element) => {                 
         if (element == "walking") { creatureBaseSpeed += 10; }
     });
     $('#mmBaseSpeed').text(creatureBaseSpeed);
-    
+
     var fly = "";
     list.forEach((element) => {              
         if (element == "flying") {             
             if (flying){
                 fly = ", fly " + creatureBaseSpeed + " ft. (hover)";
             } else {
+                flying = true;      
                 fly = ", fly " + creatureBaseSpeed + " ft.";
-            }                    
-            flying = true;               
+            }                                         
         }
     });
     $('#mmSpeed').append(fly);
@@ -126,15 +132,15 @@ function Locomotion(){
     list.forEach((element) => {                 
         if (element == "swimming") {             
             if (swimming){
-                if (!$('#mmAbilities').text().includes("Amphibious")){
+                if (!amphibious){
                     $('#mmAbilities').append("<property-block> <h4>Amphibious.</h4> <p>The " + creatureName + 
                     " can breathe air and water.</p> </property-block>");  
+                    amphibious = true;
                 }
             } else {
+                swimming = true;   
                 swim = ", swimming " + creatureBaseSpeed + " ft.";
-            }        
-
-            swimming = true;               
+            }                                
         }
     });
     $('#mmSpeed').append(swim);
@@ -143,26 +149,27 @@ function Locomotion(){
     list.forEach((element) => {                  
         if (element == "oozing") {             
             if (oozing){
-                if (!$('#mmAbilities').text().includes("Amorphous")){
+                if (!amorphous){
                     $('#mmAbilities').append("<property-block> <h4>Amorphous.</h4> <p>The " + creatureName + 
                     " can move through a space as narrow as 1 inch wide without squeezing.</p> </property-block>");  
+                    amorphous = true;
                 }
             } else {
+                oozing = true; 
                 ooze = ", climb " + creatureBaseSpeed + " ft.";
-                if (!$('#mmAbilities').text().includes("Spider Climb")){
+                if (!spiderclimb){
                     $('#mmAbilities').append("<property-block> <h4>Spider Climb.</h4> <p>The " + creatureName + 
                     " can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p> </property-block>");  
+                    spiderclimb = true;
                 }
-            }        
-
-            oozing = true;               
+            }                                  
         }
     });
-    $('#mmSpeed').append(", climb " + creatureBaseSpeed + " ft.");
+    $('#mmSpeed').append(ooze);
 
-    if (flying) {returnString += " and flying"; }
-    if (swimming) {returnString += " and swimming"; }
-    if (oozing) {returnString += " and oozing"; }
+    if (flying) { returnString += " and flying"; }
+    if (oozing) { returnString += " and oozing"; }
+    if (swimming) { returnString += " and swimming"; }
     return returnString;
 }
 
@@ -172,8 +179,8 @@ function LocomotionList(){
     temp = npLocomotion[Math.floor(Math.random() * npLocomotion.length)];    
     
     if (temp == "multiple"){
-        var move1 = Locomotion();
-        var move2 = Locomotion();
+        var move1 = LocomotionList();
+        var move2 = LocomotionList();
         listofspeeds.push(move1);
         listofspeeds.push(move2);
     } else {
