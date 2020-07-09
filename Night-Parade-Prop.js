@@ -12,6 +12,5 @@ $(document).ready(function(){
   var outputString = "";
   outputString += npSize[Math.floor(Math.random() * npSize.length)];
   
-  var element = document.getElementById("test");
-  element.appendChild(outputString);
+  $('#test').append(outputString);
 });
