@@ -10,7 +10,7 @@ var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "
 
 $(document).ready(function(){
   var outputString = "";
-  outputString += npSize[Math.Floor(Math.Random() * npSize.length)];
+  outputString += npSize[Math.floor(Math.random() * npSize.length)];
   
   var element = document.getElementById("test");
   element.appendChild(outputString);
