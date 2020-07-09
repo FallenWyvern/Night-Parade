@@ -10,8 +10,26 @@
     <script src="jquery-3.2.1.min.js"></script>
     <script src="jquery-ui-1.12.1\jquery-ui.js"></script>    
     <script src="Night-Parade-Prop.js"></script>
+    <script> 
+      $(function(){
+        $("#DivContent").load("StatBlocks/acoylyte.mm"); 
+      });
+    </script> 
+    <style>
+      body {
+        margin: 0;
+      }
+
+      stat-block {
+        /* A bit of margin for presentation purposes, to show off the drop
+        shadow. */
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+    </style>
   </head>
   <body>
+    <div id="DivContent"></div>
     <div id="test"></div>
   </body>
 </html>
