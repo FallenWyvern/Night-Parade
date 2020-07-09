@@ -8,7 +8,7 @@ var npSkinColors = [ "red", "orange", "yellow", "green", "blue", "indigo", "purp
 var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"];
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
 
-$(document).ready(function(){
+$(document).ready(function(){  
   var outputString = "";
   outputString += npSize[Math.floor(Math.random() * npSize.length)] + '</br>';
   outputString += npFeatures[Math.floor(Math.random() * npFeatures.length)]+ '</br>';
@@ -21,4 +21,5 @@ $(document).ready(function(){
   outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
   
   $('#test').append(outputString);
+  $("#DivContent").load("StatBlocks/acolyte.mm"); 
 });
