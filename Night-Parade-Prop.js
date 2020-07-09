@@ -105,9 +105,10 @@ function Locomotion(){
     var list = LocomotionList(); 
 
     list.forEach((element) => {                 
-        if (element == "walking") { creatureBaseSpeed += 10; $('#mmBaseSpeed').text(creatureBaseSpeed);}
+        if (element == "walking") { creatureBaseSpeed += 10; }
     });
-
+    $('#mmBaseSpeed').text(creatureBaseSpeed);
+    
     var fly = "";
     list.forEach((element) => {              
         if (element == "flying") {             
