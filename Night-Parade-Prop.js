@@ -25,5 +25,5 @@ $(document).ready(function(){
   outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
   
   $('#test').append(outputString);  
-  $("#mmSize span").text('fart');
+  $('#mmSize').append('fart');
 });
