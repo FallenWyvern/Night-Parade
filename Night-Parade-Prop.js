@@ -14,4 +14,4 @@ $(document).ready(function(){
   
   var element = document.getElementById("test");
   element.appendChild(outputString);
-}
+});
