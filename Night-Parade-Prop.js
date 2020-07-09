@@ -9,6 +9,8 @@ var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", 
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
 
 $(document).ready(function(){  
+  $("#DivContent").load("StatBlocks/acolyte.mm"); 
+
   var outputString = "";
   var outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
   outputString += outputSize + '</br>';
@@ -22,7 +24,6 @@ $(document).ready(function(){
   outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)]+ '</br>';
   outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
   
-  $('#test').append(outputString);
-  $("#DivContent").load("StatBlocks/acolyte.mm"); 
-  $('#mmSize').append(outputSize);
+  $('#test').append(outputString);  
+  $('#mmSize').append('fart');
 });
