@@ -10,14 +10,14 @@ var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "
 
 $(document).ready(function(){
   var outputString = "";
-  outputString += npSize[Math.floor(Math.random() * npSize.length)] + '\r\n';
-  outputString += npFeatures[Math.floor(Math.random() * npFeatures.length)]+ '\r\n';
-  outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)]+ '\r\n';
-  outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)]+ '\r\n';
-  outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)]+ '\r\n';
-  outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)]+ '\r\n';
-  outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)]+ '\r\n';
-  outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)]+ '\r\n';
+  outputString += npSize[Math.floor(Math.random() * npSize.length)] + '</br>';
+  outputString += npFeatures[Math.floor(Math.random() * npFeatures.length)]+ '</br>';
+  outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)]+ '</br>';
+  outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)]+ '</br>';
+  outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)]+ '</br>';
+  outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)]+ '</br>';
+  outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)]+ '</br>';
+  outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)]+ '</br>';
   outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
   
   $('#test').append(outputString);
