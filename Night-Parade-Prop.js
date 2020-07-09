@@ -1,4 +1,4 @@
-var npSize = [ "small", "small", "medium", "medium", "medium", "large" ];
+var npSize = [ "Small", "Small", "Medium", "Medium", "Medium", "Large" ];
 var npFeatures = [ "horns on head", "fangs or tusks", "oversized, pointed ears", "solid-colored eyes", "animal eyes", "furry/hairless body", "spinal ridges", "covered in feathers", "non-prehensile tail", "covered in scales", "clawed hands", "amorphous body", "unusually powerful smell", "extra set of smaller arms", "centaur-like body shape", "insect-like chitinous carapace", "multiple unified voices", "an extra head or face" ];
 var npLocomotion = [ "swims", "walks", "walks", "walks", "walks", "walks", "oozes", "flies", "multiple", "multiple"];
 var npSkinThickness = [ "normal", "thick", "waxy", "woody", "stoney", "metallic" ];
@@ -10,7 +10,9 @@ var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "
 
 $(document).ready(function(){  
   var outputString = "";
-  outputString += npSize[Math.floor(Math.random() * npSize.length)] + '</br>';
+  var outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
+  outputString += outputSize + '</br>';
+
   outputString += npFeatures[Math.floor(Math.random() * npFeatures.length)]+ '</br>';
   outputString += npLocomotion[Math.floor(Math.random() * npLocomotion.length)]+ '</br>';
   outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)]+ '</br>';
@@ -22,4 +24,5 @@ $(document).ready(function(){
   
   $('#test').append(outputString);
   $("#DivContent").load("StatBlocks/acolyte.mm"); 
+  $('#mmSize').append(outputSize);
 });
