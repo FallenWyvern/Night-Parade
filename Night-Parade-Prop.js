@@ -105,9 +105,10 @@ function Locomotion(){
     var list = LocomotionList(); 
 
     list.forEach((element) => {                 
-        if (element == "walking") { creatureBaseSpeed += 10; $('#mmBaseSpeed').text(creatureBaseSpeed);}
+        if (element == "walking") { creatureBaseSpeed += 10; }
     });
-
+    $('#mmBaseSpeed').text(creatureBaseSpeed);
+    
     var fly = "";
     list.forEach((element) => {              
         if (element == "flying") {             
@@ -121,6 +122,7 @@ function Locomotion(){
     });
     $('#mmSpeed').append(fly);
 
+    var swim = ""
     list.forEach((element) => {                 
         if (element == "swimming") {             
             if (swimming){
@@ -129,14 +131,16 @@ function Locomotion(){
                     " can breathe air and water.</p> </property-block>");  
                 }
             } else {
-                $('#mmSpeed').append(", swimming " + creatureBaseSpeed + " ft.");
+                swim = ", swimming " + creatureBaseSpeed + " ft.";
             }        
 
             swimming = true;               
         }
     });
+    $('#mmSpeed').append(swim);
 
-        list.forEach((element) => {                  
+    var ooze = "";
+    list.forEach((element) => {                  
         if (element == "oozing") {             
             if (oozing){
                 if (!$('#mmAbilities').text().includes("Amorphous")){
@@ -144,7 +148,7 @@ function Locomotion(){
                     " can move through a space as narrow as 1 inch wide without squeezing.</p> </property-block>");  
                 }
             } else {
-                $('#mmSpeed').append(", climb " + creatureBaseSpeed + " ft.");
+                ooze = ", climb " + creatureBaseSpeed + " ft.";
                 if (!$('#mmAbilities').text().includes("Spider Climb")){
                     $('#mmAbilities').append("<property-block> <h4>Spider Climb.</h4> <p>The " + creatureName + 
                     " can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p> </property-block>");  
@@ -154,7 +158,8 @@ function Locomotion(){
             oozing = true;               
         }
     });
-    
+    $('#mmSpeed').append(", climb " + creatureBaseSpeed + " ft.");
+
     if (flying) {returnString += " and flying"; }
     if (swimming) {returnString += " and swimming"; }
     if (oozing) {returnString += " and oozing"; }
