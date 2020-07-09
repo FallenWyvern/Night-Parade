@@ -101,7 +101,7 @@ function FeaturesCause(){
 
 function NightmareCourt(){
     var courtMembers = [
-        "The Nightmare Man", "Hypnos", "Mullonga", "The Ghost Dancer", "Morpheus", "The Rainbow Serpent";
+        "The Nightmare Man", "Hypnos", "Mullonga", "The Ghost Dancer", "Morpheus", "The Rainbow Serpent"
     ];
 
     return courtMembers[Math.floor(Math.random() * courtMembers.length)];
