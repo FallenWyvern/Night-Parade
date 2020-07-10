@@ -281,7 +281,7 @@ function NightmareCourt(){
 function MutatedAttacks(){
     var attacks = MutatedAttackResult();
     attacks.forEach((element) => {  
-        var attack = ("<property-block> <h4>" + element.capitalize() + ".</h4> <p>");
+        var attack = ("<property-block> <h4>" + (element + '').capitalize() + ".</h4> <p>");
         var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
       
         var bonus = "";
