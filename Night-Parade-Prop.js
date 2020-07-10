@@ -280,10 +280,12 @@ function NightmareCourt(){
 
 function MutatedAttacks(){
     var attacks = MutatedAttackResult();
+
     attacks.forEach((element) => {  
+        console.log(element);
+
         var attack = ("<property-block> <h4>" + (element + '').capitalize() + ".</h4> <p>");
         var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
-      
         var bonus = "";
 
         if (statWithProf != 0){
@@ -294,7 +296,7 @@ function MutatedAttacks(){
             }
         } 
 
-        switch (element){
+        switch (element + ''){
             case "claws":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
@@ -311,7 +313,7 @@ function MutatedAttacks(){
                 parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
                 break;
             case  "extra arm/leg":
-                attack  = "<property-block> <h4>" + (element).capitalize() + ".</h4> <p>" +
+                attack  = "<property-block> <h4>" + (element+'').capitalize() + ".</h4> <p>" +
                 " Any turn the " + creatureName + " uses its action to make a melee attack," + 
                 " as a bonus action it makes one additional attack using an attack it used this turn."
                 break;
@@ -331,8 +333,12 @@ function MutatedAttackResult(){
     } else {
         var attack1 = MutatedAttackResult();
         var attack2 = MutatedAttackResult();
-        returnList.push(attack1);
-        returnList.push(attack2);
+        attack1.forEach((element) => { 
+            returnList.push(attack1);
+        });
+        attack2.forEach((element) => { 
+            returnList.push(attack2);
+        });
     }
 
     return returnList;
