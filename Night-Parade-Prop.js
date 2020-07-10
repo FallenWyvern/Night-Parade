@@ -100,7 +100,7 @@ function SkinType(){
         $('#mmAC').text((10 + (npSkinThickness.indexOf(temp) * 2)) + " (natural armor)");
 
     return returnString; 
-}
+}}
 
 function SkinPattern(){
     var RandomNumber = Math.floor(Math.random() * 10);
@@ -342,6 +342,4 @@ String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-String.prototype.bonus = function() {
-    return Math.floor((parseInt(this) / 2)-5);
-}
+String.prototype.bonus = function() { return Math.floor((parseInt(this) / 2)-5); }
