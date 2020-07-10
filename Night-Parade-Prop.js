@@ -11,7 +11,22 @@ var creatureCR = 0;
 var creatureBaseSpeed = 0;
 var outputSize = "";
 var creatureStats = [];
+var creatureSpecialAbilityCount = 0;
 
+function CRMap(crValue){        
+        switch (crValue){
+            case "0":
+                return 0;
+            case "1/8":
+                return 1;
+            case "1/4":
+                return 2;
+            case "1/2":
+                return 3;
+        }
+    
+        return parseInt(crValue + 3);
+}
 
 var mmCRValues = {
     "0": ["2", "13", "3", "10"],
@@ -50,12 +65,24 @@ var mmCRValues = {
     "30":["9", "19", "14", "155000"]
  };
 
+function mmCRIndex(index){
+    var count = 0;
+    Object.keys(mmCRValues).forEach(function (key){
+        console.log("FOUND: " + mmCRValues[key]);
+        if (count == index){            
+            //break;
+            console.log("STOP");
+        }
+        count ++;                
+    });    
+};
+
 function DoTheThing(){  
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
     /* When load is done */    
     creatureName += $('#mmName').text(); 
     $('#mmName').text(creatureName);
-    
+
     var bonus = $('#mmStats').html().split('=');
     creatureStats.push(bonus[1].substring(1,3).replace('"', ''));
     creatureStats.push(bonus[2].substring(1,3).replace('"', ''));
@@ -66,25 +93,94 @@ function DoTheThing(){
 
     var cr = $('#mmCR').text().split('(')[0].trim();
     creaturecr =  cr;
+    
+    creatureSpecialAbilityCount = numberOfSpecials();
+    console.log("CR:" + creaturecr + " | Abilities: " + creatureSpecialAbilityCount);
 
     creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
     outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
     
-    //outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
-    //outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)];
-    //outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];
-    //outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
-    
     $('#test').append(Features());  
-    MutatedAttacks();        
+    MutatedAttacks();
+    SavingThrows();        
   });   
 };
+
+function SavingThrows(){
+    var saves = $('#mmSaves').text().trim();
+    var save1 = SavingThrow();
+    var save2 = SavingThrow();
+
+    if (saves == ""){                
+        while(save1 == save2 || save1.trim() == "" || save2.trim() == ""){
+            save1 = SavingThrow();
+            save2 = SavingThrow();
+        }
+
+         $('#mmSaves').append("<h4>Saving Throws.</h4> " +
+        "<p>" + save1 + ", " + save2 + "</p>");        
+    } else if (saves.split(',').length == 1){
+        console.log(saves);
+        save1 = saves.slice(14).trim();
+
+        while(save1 == save2 || save1.trim() == "" || save2.trim() == ""){            
+            save2 = SavingThrow();
+        }
+
+        $('#mmSaves').html("<h4>Saving Throws.</h4> " +
+        "<p>" + save1 + ", " + save2) + "</p>";  
+    }
+}
+
+function SavingThrow(){
+    var ability = npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];    
+    var stat = ability.substr(0, 3);
+    var statPlus = "";
+
+    switch (ability){
+        case "strength":            
+            statPlus = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+        case "dexterity":
+            statPlus = (parseInt(creatureStats[1].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+        case "constitution":
+            statPlus = (parseInt(creatureStats[2].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+        case "intelligence":
+            statPlus = (parseInt(creatureStats[3].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+        case "wisdom":
+            statPlus = (parseInt(creatureStats[4].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+        case "charisma":
+            statPlus = (parseInt(creatureStats[5].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            break;
+    }
+
+    var totalReturn = stat + " +" + statPlus;  
+    if ($('#mmSaves').text().includes(stat)) { totalReturn = ""; }  
+    return (totalReturn).capitalize();
+}
+
+function numberOfSpecials(){
+    var amount = [1, 1, 1, 2, 2, 2, 2, 3, 3, 4];    
+    var result = parseInt(amount[Math.floor(Math.random() * amount.length)]);    
+    
+    if (result == 4){
+        console.log("HIGH ROLLER");
+        return (numberOfSpecials() + 1);
+    }
+
+    console.log("NOS: " + result);
+    return result;
+}
 
 function Features(){
     var returnString = FeaturesCause();
     returnString += "this member of the night parade has ";
     returnString += npFeatures[Math.floor(Math.random() * npFeatures.length)];
-    returnString += ". They move by " + Locomotion() + ". ";
+    returnString += ". They move by " + Locomotion() + ". ";    
     returnString += SkinType() + "</br>";
 
     returnString += Abilities();
@@ -95,16 +191,19 @@ function SkinType(){
     var returnString = "";
 
     var temp = npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
+    console.log("TYPE: " + temp);
     if (temp != "normal"){
         returnString += "They have an unusual hide that feels " + temp + ". " + SkinPattern();
         $('#mmAC').text((10 + (npSkinThickness.indexOf(temp) * 2)) + " (natural armor)");
+    }
 
     return returnString; 
-}}
+}
 
 function SkinPattern(){
     var RandomNumber = Math.floor(Math.random() * 10);
     var returnString = "";
+    console.log("Skin Pattern: " + RandomNumber);
 
     switch (RandomNumber){
         case 0:
