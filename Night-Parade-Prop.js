@@ -282,19 +282,15 @@ function MutatedAttacks(){
     var attacks = MutatedAttackResult();
 
     attacks.forEach((element) => {  
-        console.log(element);
-
         var attack = ("<property-block> <h4>" + (element + '').capitalize() + ".</h4> <p>");
         var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
         var bonus = "";
 
-        if (statWithProf != 0){
-            if (statWithProf > 0){
-                bonus = " +" + statWithProf;
-            } else {
-                bonus = " -" + statWithProf;
-            }
-        } 
+        if (statWithProf >= 0){
+            bonus = " +" + statWithProf;
+        } else {
+            bonus = " -" + statWithProf;
+        }
 
         switch (element + ''){
             case "claws":
@@ -303,12 +299,12 @@ function MutatedAttacks(){
                 parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
                 break;
             case  "bite":
-                attack  += "<i>Melee Weapon Attack: </i>+" + bonus +  
+                attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
                 parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
                 break;
             case "tentacle":
-                attack  += "<i>Melee Weapon Attack: </i>+" + bonus +  
+                attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
                 parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
                 break;
@@ -328,6 +324,9 @@ function MutatedAttackResult(){
     var returnList = [];
     var npAttackForm = [ "claws", "claws", "claws", "bite", "bite", "bite", "tentacle", "tentacle", "tentacle", "extra arm/leg", "extra arm/leg", "multiple" ];
     var test = npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
+    
+    console.log(">" + test);
+
     if (test != "multiple"){
         returnList.push(test);
     } else {
@@ -335,9 +334,11 @@ function MutatedAttackResult(){
         var attack2 = MutatedAttackResult();
         attack1.forEach((element) => { 
             returnList.push(attack1);
+            console.log(">>" + attack1);
         });
         attack2.forEach((element) => { 
             returnList.push(attack2);
+            console.log(">>" + attack2);
         });
     }
 
