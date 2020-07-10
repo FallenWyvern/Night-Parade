@@ -7,7 +7,7 @@
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p>10</p>
+        <p id='mmAC'>10</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>
@@ -19,12 +19,12 @@
         </span>
       </property-line>
       <div id='mmStats'>
-      <abilities-block data-str="10"
-                       data-dex="10"
-                       data-con="10"
-                       data-int="10"
-                       data-wis="14"
-                       data-cha="11"></abilities-block>
+        <abilities-block data-str="10"
+                        data-dex="10"
+                        data-con="10"
+                        data-int="10"
+                        data-wis="14"
+                        data-cha="11"></abilities-block>
       </div>
       <property-line>
         <h4>Skills</h4>
@@ -40,7 +40,7 @@
       </property-line>
       <property-line>
         <h4>Challenge</h4>
-        <p>1/4 (50 XP)</p>
+        <p id="mmCR">1/4 (50 XP)</p>
       </property-line>
     </top-stats>
 
@@ -56,10 +56,11 @@
     </div>
     
     <h3>Actions</h3>
-
-    <property-block>
-      <h4>Club.</h4>
-      <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-        <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
-    </property-block>
+    <div id = 'mmAttacks'>
+        <property-block>
+        <h4>Club.</h4>
+        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
+            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+        </property-block>
+    </div>
   </stat-block>

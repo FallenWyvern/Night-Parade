@@ -2,14 +2,16 @@ var npSize = [ "Small", "Small", "Medium", "Medium", "Medium", "Large" ];
 var npFeatures = [ "horns on head", "fangs or tusks", "oversized, pointed ears", "solid-colored eyes", "animal eyes", "a furry or hairless body", "spinal ridges", "feathered skin", "a non-prehensile tail", "scaled skin", "clawed hands", "an amorphous body", "an unusually powerful smell", "an extra set of smaller arms", "a centaur-like body shape", "an insect-like chitinous carapace", "multiple unified voices", "an extra head or face" ];
 var npLocomotion = [ "swimming", "walking", "walking", "walking", "walking", "walking", "oozing", "flying", "multiple", "multiple"];
 var npSkinThickness = [ "normal", "thick", "waxy", "woody", "stoney", "metallic" ];
-var npAttackForm = [ "claws", "claws", "claws", "bite", "bite", "bite", "tentacle", "tentacle", "tentacle", "extra arm/leg", "extra arm/leg", "multiple" ];
-var npSkinPattern = [ "alternating stripes", "back of one color, softer color on the belly", "solid color", "head and limbs one color, body is another", "one color during the day, another color at night", "translucent, fading to opaque tones at the end of limbs", "randomly colored", "delicate coloration mixing two colors", "three colors banding alternately around the body", "iridescently glowing with a ever shifting light"];
 var npSkinColors = [ "red", "orange", "yellow", "green", "blue", "indigo", "purple", "white", "black", "natural color of their race"];
 var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"];
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
+
 var creatureName = "Night Parade ";
+var creatureCR = 0;
 var creatureBaseSpeed = 0;
 var outputSize = "";
+var creatureStats = [];
+
 
 var mmCRValues = {
     "0": ["2", "13", "3", "10"],
@@ -51,20 +53,30 @@ var mmCRValues = {
 function DoTheThing(){  
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
     /* When load is done */    
-    creatureName = $('#mmName').text();    
-    creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
+    creatureName += $('#mmName').text(); 
+    $('#mmName').text(creatureName);
+    
+    var bonus = $('#mmStats').html().split('=');
+    creatureStats.push(bonus[1].substring(1,3).replace('"', ''));
+    creatureStats.push(bonus[2].substring(1,3).replace('"', ''));
+    creatureStats.push(bonus[3].substring(1,3).replace('"', ''));
+    creatureStats.push(bonus[4].substring(1,3).replace('"', ''));
+    creatureStats.push(bonus[5].substring(1,3).replace('"', ''));
+    creatureStats.push(bonus[6].substring(1,3).replace('"', ''));
 
+    var cr = $('#mmCR').text().split('(')[0].trim();
+    creaturecr =  cr;
+
+    creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
     outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
     
-    var outputFeatures = npFeatures[Math.floor(Math.random() * npFeatures.length)];
-    //outputString += npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
     //outputString += npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
-    //outputString += npSkinPattern[Math.floor(Math.random() * npSkinPattern.length)];
     //outputString += npSkinColors[Math.floor(Math.random() * npSkinColors.length)];
     //outputString += npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];
     //outputString += npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
     
-    $('#test').append(Features());          
+    $('#test').append(Features());  
+    MutatedAttacks();        
   });   
 };
 
@@ -72,9 +84,67 @@ function Features(){
     var returnString = FeaturesCause();
     returnString += "this member of the night parade has ";
     returnString += npFeatures[Math.floor(Math.random() * npFeatures.length)];
-    returnString += ". It moves by " + Locomotion() + ". ";
+    returnString += ". They move by " + Locomotion() + ". ";
+    returnString += SkinType() + "</br>";
+
     returnString += Abilities();
     return returnString;
+}
+
+function SkinType(){
+    var returnString = "";
+
+    var temp = npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
+    if (temp != "normal"){
+        returnString += "They have an unusual hide that feels " + temp + ". " + SkinPattern();
+        $('#mmAC').text((10 + (npSkinThickness.indexOf(temp) * 2)) + " (natural armor)");
+
+    return returnString; 
+}
+
+function SkinPattern(){
+    var RandomNumber = Math.floor(Math.random() * 10);
+    var returnString = "";
+
+    switch (RandomNumber){
+        case 0:
+            returnString = "Their skin is a pattern of alternating " + SkinColor() + " and " + SkinColor() + " stripes. ";
+            break;
+        case 1:
+            returnString = "Their back is " + SkinColor() +  " which fades to " + SkinColor() +  " on their belly and palms. ";
+            break;
+        case 2:
+            returnString =  "Their skin is a solid " + SkinColor() + ". ";
+            break;
+        case 3:
+            returnString = "Their head and limbs are "  + SkinColor() + " while their body is " + SkinColor() + ". ";
+            break;
+        case 4:
+            returnString = "During the day, their skin is " + SkinColor() + " which becomes " + SkinColor() + " under the night sky. ";
+            break;
+        case 5:
+            returnString = "Their body is translucent, only showing an opaque " + SkinColor() + " at the ends of their limbs.  ";
+            break;
+        case 6:
+            returnString = "Their body is randomly colored in splotches."
+            break;
+        case 7:
+            returnString = "Their body is a delicate mixture of " + SkinColor() + " and " + SkinColor() + ", creating a gentle marble effect. ";
+            break;
+        case 8:
+            returnString = SkinColor() + ", " +  SkinColor() + ", and " + SkinColor() + " bands swirl and alternate across their skin. ";
+            break;
+        case 9:
+            returnString = "Their " + SkinColor() + " skin is marked with " + SkinColor() + " lines that gently glow in the dark. ";
+            break;
+    }
+
+    return returnString.capitalize();
+}
+
+function SkinColor(){
+    var tone = [ "light", "", "", "", "", "dark"]
+    return (tone[Math.floor(Math.random() * tone.length)] + " " + npSkinColors[Math.floor(Math.random() * npSkinColors.length)]).trim();
 }
 
 function Abilities(){
@@ -83,13 +153,11 @@ function Abilities(){
     if (outputSize == "Small"){
         $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
         " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
-        // $('#mmStats').childNodes[0].attr("data-str") = ($('#mmStats').attr("data-str") - 2);
     };
 
     if (outputSize == "Large"){
         $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
         " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
-        // $('#mmStats').childNodes[0].attr("data-str") = ($('#mmStats').attr("data-str") + 2);
     }; 
     
     return returnString;
@@ -196,7 +264,7 @@ function FeaturesCause(){
         "After having wandered for too long in the alleyways of Nod, ",
         "Ravaged by miscast magics, ",
         "Twisted by the black ichor blood of a maelephant, ",
-        "Cursed by " + NightmareCourt() + " of the Nightmare Court, "
+        "Cursed by " + NightmareCourt() + " of the nightmare court, "
     ];
 
     return causes[Math.floor(Math.random() * causes.length)];
@@ -208,4 +276,72 @@ function NightmareCourt(){
     ];
 
     return courtMembers[Math.floor(Math.random() * courtMembers.length)];
+}
+
+function MutatedAttacks(){
+    var attacks = MutatedAttackResult();
+    attacks.forEach((element) => {  
+        var attack = ("<property-block> <h4>" + (element).capitalize() + ".</h4> <p>");
+        var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+      
+        var bonus = "";
+
+        if (statWithProf != 0){
+            if (statWithProf > 0){
+                bonus = " +" + statWithProf;
+            } else {
+                bonus = " -" + statWithProf;
+            }
+        } 
+
+        switch (element){
+            case "claws":
+                attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
+                " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
+                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                break;
+            case  "bite":
+                attack  += "<i>Melee Weapon Attack: </i>+" + bonus +  
+                " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
+                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                break;
+            case "tentacle":
+                attack  += "<i>Melee Weapon Attack: </i>+" + bonus +  
+                " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
+                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                break;
+            case  "extra arm/leg":
+                attack  = "<property-block> <h4>" + (element).capitalize() + ".</h4> <p>" +
+                " Any turn the " + creatureName + " uses its action to make a melee attack," + 
+                " as a bonus action it makes one additional attack using an attack it used this turn."
+                break;
+        }
+
+        attack += "</p> </property-block>";      
+        $('#mmAttacks').append(attack);
+    });
+}
+
+function MutatedAttackResult(){
+    var returnList = [];
+    var npAttackForm = [ "claws", "claws", "claws", "bite", "bite", "bite", "tentacle", "tentacle", "tentacle", "extra arm/leg", "extra arm/leg", "multiple" ];
+    var test = npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
+    if (test != "multiple"){
+        returnList.push(test);
+    } else {
+        var attack1 = MutatedAttackResult();
+        var attack2 = MutatedAttackResult();
+        returnList.push(attack1);
+        returnList.push(attack2);
+    }
+
+    return returnList;
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
+
+String.prototype.bonus = function() {
+    return Math.floor((parseInt(this) / 2)-5);
 }
