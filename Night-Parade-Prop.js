@@ -7,6 +7,7 @@ var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", 
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
 
 var creatureName = "Night Parade ";
+var creatureRace = "";
 var creatureCR = 0;
 var creatureBaseSpeed = 0;
 var outputSize = "";
@@ -81,6 +82,7 @@ function DoTheThing(){
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
     /* When load is done */    
     creatureName += $('#mmName').text(); 
+    creatureRace += $('#mmRace').text(); 
     $('#mmName').text(creatureName);
 
     var bonus = $('#mmStats').html().split('=');
@@ -100,11 +102,22 @@ function DoTheThing(){
     creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
     outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
     
-    $('#test').append(Features());  
     MutatedAttacks();
-    SavingThrows();        
+    SavingThrows();            
+
+    $('#test').append(Features());  
   });   
 };
+
+function Features(){
+    var returnString = FeaturesCause();
+    returnString += "this member of the night parade has ";
+    returnString += npFeatures[Math.floor(Math.random() * npFeatures.length)];
+    returnString += Abilities() + ". They move by " + Locomotion() + ". ";    
+    returnString += SkinType() + "</br>";
+    returnString += bigFeatures();
+    return returnString;
+}
 
 function SavingThrows(){
     var saves = $('#mmSaves').text().trim();
@@ -176,17 +189,6 @@ function numberOfSpecials(){
     return result;
 }
 
-function Features(){
-    var returnString = FeaturesCause();
-    returnString += "this member of the night parade has ";
-    returnString += npFeatures[Math.floor(Math.random() * npFeatures.length)];
-    returnString += ". They move by " + Locomotion() + ". ";    
-    returnString += SkinType() + "</br>";
-
-    returnString += Abilities();
-    return returnString;
-}
-
 function SkinType(){
     var returnString = "";
 
@@ -252,11 +254,14 @@ function Abilities(){
     if (outputSize == "Small"){
         $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
         " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
+
+        returnString += ", and are smaller than most " + creatureRace.toLowerCase() + "s";
     };
 
     if (outputSize == "Large"){
         $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
         " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
+        returnString += ", and are larger than most other " + creatureRace.toLowerCase() + "s";
     }; 
     
     return returnString;
@@ -448,4 +453,108 @@ String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-String.prototype.bonus = function() { return Math.floor((parseInt(this) / 2)-5); }
+String.prototype.bonus = function() {
+    return Math.floor(parseInt(this / 2) - 5);
+}
+
+String.prototype.bonusplus = function() {
+    return Math.floor(parseInt(this / 2) - 5) + parseInt(mmCRValues[creatureCR][0]);
+}
+
+function bigFeatures(){
+    var randomFeature = Math.floor(Math.random() * 100) + 1;
+    var DC = 10 + parseInt((creatureStats[5].bonus()));
+    var returnString = "";
+
+    randomFeature = 30;
+    // $('#mmAttacks').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>")
+    // $('#mmAbilities').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>");
+
+    switch (randomFeature){
+        case 1: 
+        case 2:
+        case 3:
+        case 4:
+            $('#mmAbilities').append("<property-block> <h4>Pustule Hide.</h4><p>At the end of each of its turns, if the " + creatureName  + " can see a hostile creature, " +
+            "acid filled pustules on its skin inflate and burst. This casts <i>acid splash</i> on all valid targets for the spell (using no action)." +
+            " The save DC for this effect is " + DC + ".</p></property-block>");
+            break;
+        case 5:
+        case 6:
+            $('#mmAbilities').append("<property-block> <h4>Reactionary Camouflage.</h4><p> If the  " + creatureName  + " takes damage, " +
+            "as a reaction it turns invisible. This lasts until the " + creatureName + " makes an attack or casts a spell.</p></property-block>");
+            break;
+        case 7:
+        case 8:
+            $('#mmAbilities').append("<property-block> <h4>Magic Resistance.</h4><p>The " + creatureName  + " has advantage on saving throws against spells.</p></property-block>");
+            break;
+        case 9:
+        case 10:            
+            $('#mmAbilities').append("<property-block> <h4>Constant Laughter.</h4><p>The first time a creature sees the " + creatureName  + ", they are affected by the <i>tasha's hideous laughter</i> spell." +
+            " The saving throw DC for this spell is " + DC + ".</p></property-block>");
+            break;
+        case 11:
+        case 12:
+            $('#mmAttacks').append("<property-block> <h4>Control Weather (Recharge short or long rest).</h4><p>The " + creatureName  + " can cast <i>control weather</i> " +
+            "without using a spell slot or material components.</p></property-block>");
+            break;
+        case 13:
+        case 14:
+            $('#mmAttacks').append("<property-block> <h4>Call Lightning (Recharge short or long rest).</h4><p>The " + creatureName  + " can cast <i>call lightning</i> " +
+            "without using a spell slot or material components. The saving throw DC for this spell is " + DC + ".</p></property-block>");
+            break;
+        case 15:
+        case 16:
+            $('#mmAbilities').append("<property-block> <h4>Corrosive Hide.</h4><p>When non-magical metal objects strike the  " + creatureName  + ", " +
+            " they turn to rust at the end of the current turn.</p></property-block>");
+            
+            $('#mmAttacks').append("<property-block> <h4>Rusting Touch.</h4> <p> <i>Melee Weapon Attack: </i>+" + creatureStats[0].bonusplus() + " to hit, reach 5 ft., one target. " +
+            "<i>Hit:</i> One non-magical metallic object worn or carried by the target crumbles to rust.</p></property-block>");            
+            break;
+        case 17:
+        case 18:
+            $('#mmAbilities').append("<property-block> <h4>Poisoned Hide.</h4><p>Any creature striking the " + creatureName  + " with a melee attack becomes " +
+            " poisoned and takes 1d8 poison damage.</p></property-block>");
+            break;
+        case 19:
+        case 20:
+            $('#mmAttacks').append("<property-block> <h4>Shape Rock (Recharge short or long rest).</h4><p>The " + creatureName  + " can cast <i>transmute rock</i> " +
+            "without using a spell slot or material components.</p></property-block>");
+            break;
+        case 21:
+        case 22:
+            $('#mmAbilities').append("<property-block> <h4>Cloud Kill Immunity.</h4><p> The " + creatureName  + " is immune to the <i>cloudkill</i> spell.</p></property-block>");
+
+            $('#mmAttacks').append("<property-block> <h4>Death Cloud (Recharge long rest).</h4><p>The " + creatureName  + " can cast <i>cloudkill</i> " +
+            "without using a spell slot or material components. The spell stays centered on the " + creatureName + " and the saving throw for this " +
+            " effect is " + DC + ".</p></property-block>");
+            break;
+        case 23:
+        case 24:
+            $('#mmAttacks').append("<property-block> <h4>Screeching Hide.</h4><p> As a bonus action, an extra mouth appears on the  " + creatureName  + " which begins to scream." +
+            "Any being within 30 feet who can hear the scream must succeed on a " + DC + " Wisdom saving throw or become stunned until the end of their next turn.</p></property-block>");
+            break;
+        case 25:
+        case 26:
+            $('#mmAttacks').append("<property-block> <h4>Fire Belch (Recharge 5-6).</h4><p>As a bonus action, the " + creatureName  + " can cast <i>burning hands</i>. " +
+            "This effect is considered non-magical and the saving throw for this effect is " + DC + ".</p></property-block>");
+            break;
+        case 27:
+        case 28:
+            $('#mmAttacks').append("<property-block> <h4>Mistform (Recharge long rest).</h4><p>The " + creatureName  + " can cast <i>gaseous form</i>. " +
+            "The " + creatureName + " can use this trait three times before it needs to be recharged.</p></property-block>");
+            break;
+        case 29:
+        case 30:
+            var element1 = "";
+            var element2 = "";
+            while (element1 == element2){
+                element1 = npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
+                element2 = npDamageTypes[Math.floor(Math.random() * npDamageTypes.length)];
+            }
+            $('#mmAbilities').append("<property-block> <h4>Regeneration.</h4><p> At the start of each of its turns, the " + creatureName  + " regains 5 hit points. Additionally, it" +
+            " is resistant to " + element1 + " and " + element2 + " damage.</p></property-block>");
+            break;
+    }
+    return returnString;
+}
