@@ -465,8 +465,6 @@ function bigFeatures(){
     var randomFeature = Math.floor(Math.random() * 100) + 1;
     var DC = 10 + parseInt((creatureStats[5].bonus()));
     var returnString = "";
-
-    randomFeature = 30;
     // $('#mmAttacks').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>")
     // $('#mmAbilities').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>");
 
