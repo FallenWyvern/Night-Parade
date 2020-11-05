@@ -59,6 +59,7 @@ function DoTheThing(){
     outputSize = $('#mmSize').text();
 
     $('#mmName').text(creatureName);
+    // Creature Race
 
     var bonus = $('#mmStats').html().split('=');
     creatureStats.push(bonus[1].substring(1,3).replace('"', ''));
@@ -68,6 +69,9 @@ function DoTheThing(){
     creatureStats.push(bonus[5].substring(1,3).replace('"', ''));
     creatureStats.push(bonus[6].substring(1,3).replace('"', ''));
 
+    // Update stats from Race
+    // Add special race abilities
+    
     var cr = $('#mmCR').text().split('(')[0].trim();
     creaturecr = cr;
     
