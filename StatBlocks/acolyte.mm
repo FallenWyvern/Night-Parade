@@ -10,8 +10,8 @@
         <p id='mmAC'>10</p>
       </property-line>
       <property-line>
-        <h4>Hit Points</h4>
-        <p>9 (2d8)</p>
+        <h4>Hit Points</h4>        
+        <p id='mmHP'>9 (2d8)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -43,7 +43,7 @@
         <p>Any one language (usually Common)</p>
       </property-line>
       <property-line>
-        <h4>Challenge</h4>
+        <h4>Challenge</h4>        
         <p id="mmCR">1/4 (50 XP)</p>
       </property-line>
     </top-stats>

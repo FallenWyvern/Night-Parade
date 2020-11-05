@@ -14,69 +14,42 @@ var outputSize = "";
 var creatureStats = [];
 var creatureSpecialAbilityCount = 0;
 
-function CRMap(crValue){        
-        switch (crValue){
-            case "0":
-                return 0;
-            case "1/8":
-                return 1;
-            case "1/4":
-                return 2;
-            case "1/2":
-                return 3;
-        }
-    
-        return parseInt(crValue + 3);
-}
-
 var mmCRValues = {
-    "0": ["2", "13", "3", "10"],
-    "1/8":["2", "13", "3", "25"],
-    "1/4":["2", "13", "3", "50"],
-    "1/2":["2", "13", "3", "100"],
-    "1":["2", "13", "3", "200"],
-    "2":["2", "13", "3", "450"],
-    "3":["2", "13", "4", "700"],
-    "4":["2", "14", "5", "1100"],
-    "5":["3", "15", "6", "1800"],
-    "6":["3", "15", "6", "2300"],
-    "7":["3", "15", "6", "2900"],
-    "8":["3", "16", "7", "3900"],
-    "9":["4", "16", "7", "5000"],
-    "10":["4", "17", "7", "5900"],
-    "11":["4", "17", "8", "7200"],
-    "12":["4", "17", "8", "8400"],
-    "13":["5", "18", "8", "10000"],
-    "14":["5", "18", "8", "11500"],
-    "15":["5", "18", "8", "13000"],
-    "16":["5", "18", "9", "15000"],
-    "17":["6", "18", "10", "18000"],
-    "18":["6", "19", "10", "20000"],
-    "19":["6", "19", "10", "22000"],
-    "20":["6", "19", "10", "25000"],
-    "21":["7", "19", "11", "33000"],
-    "22":["7", "19", "11", "41000"],
-    "23":["7", "19", "11", "50000"],
-    "24":["7", "19", "12", "62000"],
-    "25":["8", "19", "12", "75000"],
-    "26":["8", "19", "12", "90000"],
-    "27":["8", "19", "13", "105000"],
-    "28":["8", "19", "13", "120000"],
-    "29":["9", "19", "13", "135000"],
-    "30":["9", "19", "14", "155000"]
+    "0": ["0", "2", "13", "3", "10", 3],
+    "1/8":["1/8", "2", "13", "3", "25", 9],
+    "1/4":["1/4", "2", "13", "3", "50", 15],
+    "1/2":["1/2", "2", "13", "3", "100", 24],
+    "1":["1", "2", "13", "3", "200", 30],
+    "2":["2", "2", "13", "3", "450", 45],
+    "3":["3", "2", "13", "4", "700", 60],
+    "4":["4", "2", "14", "5", "1,100", 75],
+    "5":["5", "3", "15", "6", "1,800", 90],
+    "6":["6", "3", "15", "6", "2,300", 105],
+    "7":["7", "3", "15", "6", "2,900", 120],
+    "8":["8", "3", "16", "7", "3,900", 120],
+    "9":["9", "4", "16", "7", "5,000", 135],
+    "10":["10", "4", "17", "7", "5,900", 150],
+    "11":["11", "4", "17", "8", "7,200", 165],
+    "12":["12", "4", "17", "8", "8,400", 180],
+    "13":["13", "5", "18", "8", "10,000", 195],
+    "14":["14", "5", "18", "8", "11,500", 210],
+    "15":["15", "5", "18", "8", "13,000", 225],
+    "16":["16", "5", "18", "9", "15,000", 240],
+    "17":["17", "6", "18", "10", "18,000", 255],
+    "18":["18", "6", "19", "10", "20,000", 270],
+    "19":["19", "6", "19", "10", "22,000", 285],
+    "20":["20", "6", "19", "10", "25,000", 300],
+    "21":["21", "7", "19", "11", "33,000", 315],
+    "22":["22", "7", "19", "11", "41,000", 330],
+    "23":["23", "7", "19", "11", "50,000", 345],
+    "24":["24", "7", "19", "12", "62,000", 360],
+    "25":["25", "8", "19", "12", "75,000", 375],
+    "26":["26", "8", "19", "12", "90,000", 390],
+    "27":["27", "8", "19", "13", "105,000", 405],
+    "28":["28", "8", "19", "13", "120,000", 420],
+    "29":["29", "9", "19", "13", "135,000", 435],
+    "30":["30", "9", "19", "14", "155,000", 450]
  };
-
-function mmCRIndex(index){
-    var count = 0;
-    Object.keys(mmCRValues).forEach(function (key){
-        console.log("FOUND: " + mmCRValues[key]);
-        if (count == index){            
-            //break;
-            console.log("STOP");
-        }
-        count ++;                
-    });    
-};
 
 function DoTheThing(){  
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
@@ -94,9 +67,18 @@ function DoTheThing(){
     creatureStats.push(bonus[6].substring(1,3).replace('"', ''));
 
     var cr = $('#mmCR').text().split('(')[0].trim();
-    creaturecr =  cr;
+    creaturecr = cr;
     
     creatureSpecialAbilityCount = numberOfSpecials();
+    if (creaturecr.includes("/")){
+        if (creatureSpecialAbilityCount >= 2){
+            creaturecr = 1;
+        }
+    } else {
+        var increasedCR = parseInt(creaturecr) + parseInt(creatureSpecialAbilityCount/2);
+        console.log(increasedCR);
+        creaturecr = mmCRValues[increasedCR][0];
+    }
     console.log("CR:" + creaturecr + " | Abilities: " + creatureSpecialAbilityCount);
 
     creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
@@ -106,6 +88,8 @@ function DoTheThing(){
     SavingThrows();            
 
     $('#test').append(Features());  
+    $('#mmCR').text(creaturecr + " (" + mmCRValues[creaturecr][4] + " XP)");  
+    $('#mmHP').text(HitPoints());
   });   
 };
 
@@ -171,22 +155,22 @@ function SavingThrow(){
 
     switch (ability){
         case "strength":            
-            statPlus = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
         case "dexterity":
-            statPlus = (parseInt(creatureStats[1].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[1].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
         case "constitution":
-            statPlus = (parseInt(creatureStats[2].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[2].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
         case "intelligence":
-            statPlus = (parseInt(creatureStats[3].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[3].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
         case "wisdom":
-            statPlus = (parseInt(creatureStats[4].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[4].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
         case "charisma":
-            statPlus = (parseInt(creatureStats[5].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+            statPlus = (parseInt(creatureStats[5].bonus()) + parseInt(mmCRValues[creatureCR][1]));
             break;
     }
 
@@ -271,6 +255,7 @@ function Abilities(){
     var returnString = "";
     
     if (outputSize == "Small"){
+        $('#mmSize').text("Small");
         $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
         " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
 
@@ -278,6 +263,7 @@ function Abilities(){
     };
 
     if (outputSize == "Large"){
+        $('#mmSize').text("Large");
         $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
         " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
         returnString += ", and are larger than most other " + creatureRace.toLowerCase() + "s";
@@ -406,7 +392,7 @@ function MutatedAttacks(){
 
     attacks.forEach((element) => {  
         var attack = ("<property-block> <h4>" + (element + '').capitalize() + ".</h4> <p>");
-        var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][0]));
+        var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][1]));
         var bonus = "";
 
         if (statWithProf >= 0){
@@ -477,11 +463,12 @@ String.prototype.bonus = function() {
 }
 
 String.prototype.bonusplus = function() {
-    return Math.floor(parseInt(this / 2) - 5) + parseInt(mmCRValues[creatureCR][0]);
+    return Math.floor(parseInt(this / 2) - 5) + parseInt(mmCRValues[creatureCR][1]);
 }
 
 function bigFeatures(randomFeature){    
-    var DC = 10 + parseInt((creatureStats[5].bonus()));
+    var DC = 8 + parseInt((creatureStats[5].bonus())) + parseInt(mmCRValues[creaturecr][1]);
+    console.log("Creature DC: " + DC + " " + creatureStats[5].bonus() + " " + mmCRValues[creaturecr][1]);
     var returnString = "";
 
     // $('#mmAttacks').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>")
@@ -789,4 +776,28 @@ function bigFeatures(randomFeature){
             break;
     }
     return returnString;
+}
+
+function HitPoints(){
+    var targetHP = mmCRValues[creaturecr][5];
+    var currentHP = 0;
+    var lastValue = 1000;
+    var currentMultiplier = 0;
+    var dieSize = 8;
+    var conMod = parseInt((creatureStats[2].bonus()))
+
+    if (outputSize == "Large") {dieSize = 10;}
+    if (outputSize == "Small") {dieSize = 6;}
+    
+    while (currentHP < targetHP){
+        currentMultiplier++;        
+        currentHP = (currentMultiplier * ((dieSize / 2) + 0.5)) + (currentMultiplier * conMod);        
+        console.log("TARGET: " + targetHP + " | " + currentHP + " " + currentMultiplier + " " + dieSize + " (" + ((dieSize / 2) + 0.5) + ") " + conMod);
+    }
+
+    returnstring = parseInt(currentHP);
+    returnstring = returnstring + " (" + currentMultiplier + "d" + dieSize;
+    if (conMod != 0) {returnstring = returnstring +  " + "  + (conMod * currentMultiplier)};    
+    returnstring = returnstring + ")";
+    return returnstring;
 }
