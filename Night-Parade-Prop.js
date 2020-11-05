@@ -52,6 +52,13 @@ var mmCRValues = {
  };
 
 function DoTheThing(){  
+    creatureName = "Night Parade ";
+    creatureRace = "";
+    creatureCR = 0;
+    creatureBaseSpeed = 0;
+    outputSize = "";
+    creatureStats = [];
+    creatureSpecialAbilityCount = 0;
   $("#DivContent").load("StatBlocks/acolyte.mm", function() {
     /* When load is done */    
     creatureName += $('#mmName').text(); 
@@ -71,7 +78,7 @@ function DoTheThing(){
 
     // Update stats from Race
     // Add special race abilities
-    
+
     var cr = $('#mmCR').text().split('(')[0].trim();
     creaturecr = cr;
     

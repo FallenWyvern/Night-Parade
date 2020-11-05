@@ -27,7 +27,9 @@
      $( function() {
         $( ".widget input[type=submit], .widget a, .widget button" ).button();
         $( "button, input, a" ).click( function( event ) {
-        DoTheThing(); 
+            $("#DivContent").empty();
+            $("#test").empty();
+            DoTheThing(); 
         } );
     } );
         $(document).ready(function(){  
