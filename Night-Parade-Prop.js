@@ -56,6 +56,8 @@ function DoTheThing(){
     /* When load is done */    
     creatureName += $('#mmName').text(); 
     creatureRace += $('#mmRace').text(); 
+    outputSize = $('#mmSize').text();
+
     $('#mmName').text(creatureName);
 
     var bonus = $('#mmStats').html().split('=');
@@ -82,7 +84,9 @@ function DoTheThing(){
     console.log("CR:" + creaturecr + " | Abilities: " + creatureSpecialAbilityCount);
 
     creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
-    outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
+    if (outputSize != "Small"){
+        outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
+    }
     
     MutatedAttacks();
     SavingThrows();            
