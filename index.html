@@ -24,8 +24,14 @@
     <script type="module" src="./src/js/property-line.js"></script>
     <script type="module" src="./src/js/property-block.js"></script>
     <script>
+     $( function() {
+        $( ".widget input[type=submit], .widget a, .widget button" ).button();
+        $( "button, input, a" ).click( function( event ) {
+        DoTheThing(); 
+        } );
+    } );
         $(document).ready(function(){  
-            DoTheThing(); 
+            
         });
     </script>
     <style>
@@ -42,6 +48,7 @@
     </style>
   </head>
   <body>
+    <button class="ui-button ui-widget ui-corner-all">Load Creature</button>
     <div id="DivContent"></div>
     <div id="test" style="margin-left: 25px; margin-top: 25px; width: 400px;"></div>
   </body>
