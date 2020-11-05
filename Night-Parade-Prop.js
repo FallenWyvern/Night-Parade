@@ -117,9 +117,22 @@ function Features(){
     returnString += SkinType() + "</br>";
     
     returnString += "<p style='margin-left:40px;'></p>";
+    
+    var randomFeature = [];    
+    for (i = 0; i < creatureSpecialAbilityCount; i++){        
+        randomFeature[i] = Math.floor(Math.random() * 100) + 1;
+        randomFeature.forEach(element => 
+            {
+                while (element == randomFeature[i]){
+                    randomFeature[i] = Math.floor(Math.random() * 100) + 1;
+                }
+            }
+        );
+    }
 
-    for (i = 0; i < creatureSpecialAbilityCount; i++){
-        returnString += bigFeatures() + " ";
+    for (i = 0; i < creatureSpecialAbilityCount; i++){   
+        console.log(randomFeature[i]);     
+        returnString += bigFeatures(randomFeature[i]) + " ";
     }
     
     return returnString;
@@ -433,8 +446,8 @@ function MutatedAttacks(){
 function MutatedAttackResult(){
     var returnList = [];
     var npAttackForm = [ "claws", "claws", "claws", "bite", "bite", "bite", "tentacle", "tentacle", "tentacle", "extra arm/leg", "extra arm/leg", "multiple" ];
-    var test = npAttackForm[Math.floor(Math.random() * npAttackForm.length)];
-    
+    var test = npAttackForm[Math.floor(Math.random() * npAttackForm.length)];    
+
     console.log(">" + test);
 
     if (test != "multiple"){
@@ -467,8 +480,7 @@ String.prototype.bonusplus = function() {
     return Math.floor(parseInt(this / 2) - 5) + parseInt(mmCRValues[creatureCR][0]);
 }
 
-function bigFeatures(){
-    var randomFeature = Math.floor(Math.random() * 100) + 1;
+function bigFeatures(randomFeature){    
     var DC = 10 + parseInt((creatureStats[5].bonus()));
     var returnString = "";
 
