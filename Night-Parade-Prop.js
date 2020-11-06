@@ -62,6 +62,7 @@ function DoTheThing(){
     
     console.log($( "#npcBlock option:selected" ).text());
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {
+    // Racial mods
     modifyResults();
 
     creatureName = $('#mmName').text(); 

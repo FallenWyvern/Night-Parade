@@ -1,4 +1,5 @@
 function modifyResults(){
+    return;
     var race = $("#raceBlock option:selected").text().toLowerCase();
     var abilities = $('#mmStats').first().children().data();
     $('#mmRace').text($("#raceBlock option:selected").text());
