@@ -52,21 +52,21 @@ var mmCRValues = {
  };
 
 function DoTheThing(){  
-    creatureName = "Night Parade ";
+    creatureName = "";
     creatureRace = "";
     creatureCR = 0;
     creatureBaseSpeed = 0;
     outputSize = "";
     creatureStats = [];
     creatureSpecialAbilityCount = 0;
-  $("#DivContent").load("StatBlocks/acolyte.mm", function() {
-    /* When load is done */    
-    creatureName += $('#mmName').text(); 
-    creatureRace += $('#mmRace').text(); 
-    outputSize = $('#mmSize').text();
+    
+    console.log($( "#npcBlock option:selected" ).text());
+    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {
+    modifyResults();
 
-    $('#mmName').text(creatureName);
-    // Creature Race
+    creatureName = $('#mmName').text(); 
+    creatureRace += $('#mmRace').text(); 
+    outputSize = $('#mmSize').text(); 
 
     var bonus = $('#mmStats').html().split('=');
     creatureStats.push(bonus[1].substring(1,3).replace('"', ''));
@@ -105,6 +105,7 @@ function DoTheThing(){
     $('#test').append(Features());  
     $('#mmCR').text(creaturecr + " (" + mmCRValues[creaturecr][4] + " XP)");  
     $('#mmHP').text(HitPoints());
+    $('#mmName').text("Night Parade " + creatureName);
   });   
 };
 
@@ -214,7 +215,12 @@ function SkinType(){
     console.log("TYPE: " + temp);
     if (temp != "normal"){
         returnString += "They have an unusual hide that feels " + temp + ". " + SkinPattern();
-        $('#mmAC').text((10 + (npSkinThickness.indexOf(temp) * 2)) + " (natural armor)");
+        
+        var addendum = " (natural armor)";
+        if ($('#mmAC').text().includes('mage armor')) { 
+            addendum = " (" + (10 + (npSkinThickness.indexOf(temp) * 2) + 3) + " with <i>mage armor</i>)"; 
+        }
+        $('#mmAC').html((10 + (npSkinThickness.indexOf(temp) * 2)) + addendum);
     }
 
     return returnString; 
@@ -384,7 +390,7 @@ function LocomotionList(){
 
 function FeaturesCause(){
     var causes = [
-        "Due to it's time in the dream realms, ",
+        "Due to their time in the dream realms, ",
         "After having wandered for too long in the alleyways of Nod, ",
         "Ravaged by miscast magics, ",
         "Twisted by the black ichor blood of a maelephant, ",
@@ -807,7 +813,7 @@ function HitPoints(){
     while (currentHP < targetHP){
         currentMultiplier++;        
         currentHP = (currentMultiplier * ((dieSize / 2) + 0.5)) + (currentMultiplier * conMod);        
-        console.log("TARGET: " + targetHP + " | " + currentHP + " " + currentMultiplier + " " + dieSize + " (" + ((dieSize / 2) + 0.5) + ") " + conMod);
+        //console.log("TARGET: " + targetHP + " | " + currentHP + " " + currentMultiplier + " " + dieSize + " (" + ((dieSize / 2) + 0.5) + ") " + conMod);
     }
 
     returnstring = parseInt(currentHP);

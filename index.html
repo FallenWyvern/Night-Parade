@@ -10,7 +10,8 @@
         href="logo.png" />
     <script src="jquery-3.2.1.min.js"></script>
     <script src="jquery-ui-1.12.1\jquery-ui.js"></script>    
-    <script src="Night-Parade-Prop.js"></script>
+    <script type="text/javascript" src="RaceModifiers.js"></script>
+    <script type="text/javascript" src="Night-Parade-Prop.js"></script>
       
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic'
         rel='stylesheet' type='text/css'>
@@ -26,6 +27,8 @@
     <script>
      $( function() {
         $( ".widget input[type=submit], .widget a, .widget button" ).button();
+        $( "#npcBlock" ).selectmenu();
+        $( "#raceBlock" ).selectmenu();
         $( "button, input, a" ).click( function( event ) {
             $("#DivContent").empty();
             $("#test").empty();
@@ -50,7 +53,58 @@
     </style>
   </head>
   <body>
-    <button class="ui-button ui-widget ui-corner-all">Load Creature</button>
+    <button class="ui-button ui-widget ui-corner-all">Load Creature</button>    
+    <select name="NPCBlock" id="npcBlock">      
+      <option selected="selected">Acolyte</option>
+      <option>Archmage</option>
+      <option>Assassin</option>
+      <option>Bandit</option>
+      <option>Bandit Captain</option>
+      <option>Berserker</option>
+      <option>Commoner</option>
+      <option>Cultist</option>
+      <option>Cult Fanatic</option>
+      <option>Druid</option>
+      <option>Gladiator</option>
+      <option>Guard</option>
+      <option>Knight</option>
+      <option>Mage</option>
+      <option>Noble</option>
+      <option>Priest</option>
+      <option>Scout</option>
+      <option>Spy</option>
+      <option>Thug</option>
+      <option>Tribal Warrior</option>
+      <option>Veteran</option>
+    </select>    
+    <select name="RaceBlock" id="raceBlock">      
+      <option selected="selected">Human</option>
+      <option>Aarakocra</option>
+      <option>Bullywug</option>
+      <option>Dragonborn</option>
+      <option>Drow</option>
+      <option>Dwarf</option>
+      <option>Elf</option>
+      <option>Gnoll</option>
+      <option>Gnome</option>
+      <option>Gnome, deep</option>
+      <option>Goblin</option>
+      <option>Grimlock</option>
+      <option>Half-elf</option>
+      <option>Half-orc</option>
+      <option>Halfling</option>
+      <option>Hobgoblin</option>
+      <option>Kenku</option>
+      <option>Kobold</option>
+      <option>Kuo-toa</option>
+      <option>Lizardfolk</option>
+      <option>Merfolk</option>
+      <option>Orc</option>
+      <option>Skeleton</option>
+      <option>Tiefling</option>
+      <option>Troglodyte</option>
+      <option>Zombie</option>
+    </select>   
     <div id="DivContent"></div>
     <div id="test" style="margin-left: 25px; margin-top: 25px; width: 400px;"></div>
   </body>
