@@ -55,9 +55,8 @@
         </property-block>    
         <property-block>        
                 <h4>Spellcasting.</h4>
-                <p>The archmage is a 18th-level spellcaster. Its spellcasting ability is 
-                Intelligence (spell save DC 17, +9 to hit with spell attacks). The archmage has following 
-                cleric spells prepared:</p>
+                <p id='mmSpellcasting' data-level="18th" data-ability="Intelligence" data-spelllist="wizard">                
+                </p>
                 <p>Cantrips (at will): <i>firebolt</i>, <i>light</i>, <i>mage hand</i>, <i>prestidigitation</i>, <i>shocking grasp</i></p>
                 <p>1st level (4 slots): <i>detect magic</i>, <i>identify</i>, <i>mage armor*</i>, <i>magic missile</i></p>        
                 <p>2nd level (3 slots): <i>detect thoughts</i>, <i>mirror image</i>, <i>misty step</i></p>        

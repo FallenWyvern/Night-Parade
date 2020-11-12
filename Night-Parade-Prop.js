@@ -60,40 +60,42 @@ function DoTheThing(){
     creatureStats = [];
     creatureSpecialAbilityCount = 0;
     
-    console.log($( "#npcBlock option:selected" ).text());
-    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {
     // Racial mods
     modifyResults();
+    
+    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
 
     creatureName = $('#mmName').text(); 
     creatureRace += $('#mmRace').text(); 
+    $('#mmRace').text(race);
     outputSize = $('#mmSize').text(); 
+    var cr = $('#mmCR').text().split('(')[0].trim();
 
     var bonus = $('#mmStats').html().split('=');
-    creatureStats.push(bonus[1].substring(1,3).replace('"', ''));
-    creatureStats.push(bonus[2].substring(1,3).replace('"', ''));
-    creatureStats.push(bonus[3].substring(1,3).replace('"', ''));
-    creatureStats.push(bonus[4].substring(1,3).replace('"', ''));
-    creatureStats.push(bonus[5].substring(1,3).replace('"', ''));
-    creatureStats.push(bonus[6].substring(1,3).replace('"', ''));
-
+    
+    creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
+    creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
+    creatureStats.push(Number(bonus[3].substring(1,3).replace('"', '')) + race_modifiers[2]);
+    creatureStats.push(Number(bonus[4].substring(1,3).replace('"', '')) + race_modifiers[3]);
+    creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
+    creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
+    
     // Update stats from Race
     // Add special race abilities
-
-    var cr = $('#mmCR').text().split('(')[0].trim();
-    creaturecr = cr;
+    
+    creatureCR = cr;
     
     creatureSpecialAbilityCount = numberOfSpecials();
-    if (creaturecr.includes("/")){
+    if (creatureCR.includes("/")){
         if (creatureSpecialAbilityCount >= 2){
-            creaturecr = 1;
+            creatureCR = 1;
         }
     } else {
-        var increasedCR = parseInt(creaturecr) + parseInt(creatureSpecialAbilityCount/2);
+        var increasedCR = parseInt(creatureCR) + parseInt(creatureSpecialAbilityCount/2);
         console.log(increasedCR);
-        creaturecr = mmCRValues[increasedCR][0];
+        creatureCR = increasedCR;
     }
-    console.log("CR:" + creaturecr + " | Abilities: " + creatureSpecialAbilityCount);
+    console.log("CR:" + mmCRValues[creatureCR] + " | Abilities: " + creatureSpecialAbilityCount);
 
     creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
     if (outputSize != "Small"){
@@ -104,9 +106,10 @@ function DoTheThing(){
     SavingThrows();            
 
     $('#test').append(Features());  
-    $('#mmCR').text(creaturecr + " (" + mmCRValues[creaturecr][4] + " XP)");  
+    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP)");  
     $('#mmHP').text(HitPoints());
     $('#mmName').text("Night Parade " + creatureName);
+    $('#mmSpellcasting').text(Spellcasting_Trait());
   });   
 };
 
@@ -140,10 +143,10 @@ function Features(){
 }
 
 function SavingThrows(){
-    var saves = $('#mmSaves').text().trim();
+    var saves = $('#mmSaves').text().replace("Saving Throws", "").trim();
     var save1 = SavingThrow();
     var save2 = SavingThrow();
-
+    
     if (saves == ""){                
         while(save1 == save2 || save1.trim() == "" || save2.trim() == ""){
             save1 = SavingThrow();
@@ -153,45 +156,59 @@ function SavingThrows(){
          $('#mmSaves').append("<h4>Saving Throws.</h4> " +
         "<p>" + save1 + ", " + save2 + "</p>");        
     } else if (saves.split(',').length == 1){
-        console.log(saves);
-        save1 = saves.slice(14).trim();
+        save1 = SavingThrow(saves);
 
-        while(save1 == save2 || save1.trim() == "" || save2.trim() == ""){            
+        while(save1 == save2 || save2.trim() == ""){            
             save2 = SavingThrow();
         }
 
         $('#mmSaves').html("<h4>Saving Throws.</h4> " +
         "<p>" + save1 + ", " + save2) + "</p>";  
+    } else {
+        var originalSaves = "";
+        saves.split(',').forEach(element => originalSaves += SavingThrow(element.trim())  + ", ")
+        $('#mmSaves').html("<h4>Saving Throws.</h4> " +
+        "<p>" + originalSaves.substring(0, originalSaves.length -2) + "</p>"); 
     }
 }
 
-function SavingThrow(){
+function SavingThrow(abilityInput = ""){
     var ability = npSavingThrows[Math.floor(Math.random() * npSavingThrows.length)];    
+    
+    if (abilityInput != "") { ability = abilityInput.toLowerCase() }
+    
     var stat = ability.substr(0, 3);
     var statPlus = "";
-
-    switch (ability){
+    
+    switch (ability.substr(0,3)){
+        case "str":
         case "strength":            
-            statPlus = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[0].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
+        case "dex":
         case "dexterity":
-            statPlus = (parseInt(creatureStats[1].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[1].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
+        case "con":
         case "constitution":
-            statPlus = (parseInt(creatureStats[2].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[2].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
+        case "int":
         case "intelligence":
-            statPlus = (parseInt(creatureStats[3].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[3].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
+        case "wis":
         case "wisdom":
-            statPlus = (parseInt(creatureStats[4].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[4].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
+        case "cha":
         case "charisma":
-            statPlus = (parseInt(creatureStats[5].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+            statPlus = Number(creatureStats[5].bonus()) + Number(mmCRValues[creatureCR][1]);
             break;
     }
 
-    var totalReturn = stat + " +" + statPlus;  
+    var totalReturn = stat + " +" + statPlus;
+    
     if ($('#mmSaves').text().includes(stat)) { totalReturn = ""; }  
     return (totalReturn).capitalize();
 }
@@ -414,7 +431,7 @@ function MutatedAttacks(){
 
     attacks.forEach((element) => {  
         var attack = ("<property-block> <h4>" + (element + '').capitalize() + ".</h4> <p>");
-        var statWithProf = (parseInt(creatureStats[0].bonus()) + parseInt(mmCRValues[creatureCR][1]));
+        var statWithProf = Number(creatureStats[0].bonus()) + Number(parseInt(mmCRValues[creatureCR][1]));
         var bonus = "";
 
         if (statWithProf >= 0){
@@ -427,17 +444,17 @@ function MutatedAttacks(){
             case "claws":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case  "bite":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case "tentacle":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                parseInt(3 + parseInt(creatureStats[0].bonus())) + " (1d6 + " + parseInt(creatureStats[0].bonus()) +") slashing damage.";
+                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case  "extra arm/leg":
                 attack  = "<property-block> <h4>" + (element+'').capitalize() + ".</h4> <p>" +
@@ -480,17 +497,18 @@ String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
 
-String.prototype.bonus = function() {
+Number.prototype.bonus = function() {
     return Math.floor(parseInt(this / 2) - 5);
 }
 
-String.prototype.bonusplus = function() {
+Number.prototype.bonusplus = function() {
     return Math.floor(parseInt(this / 2) - 5) + parseInt(mmCRValues[creatureCR][1]);
 }
 
 function bigFeatures(randomFeature){    
-    var DC = 8 + parseInt((creatureStats[5].bonus())) + parseInt(mmCRValues[creaturecr][1]);
-    console.log("Creature DC: " + DC + " " + creatureStats[5].bonus() + " " + mmCRValues[creaturecr][1]);
+    var DC = 8 + Number(creatureStats[5].bonus()) + Number(mmCRValues[creatureCR][1]);
+
+    console.log("Creature DC: " + DC + " " + creatureStats[5].bonus() + " " + mmCRValues[creatureCR][1]);
     var returnString = "";
 
     // $('#mmAttacks').append("<property-block> <h4>NAME.</h4> <p>The " + creatureName + "</p></property-block>")
@@ -801,12 +819,12 @@ function bigFeatures(randomFeature){
 }
 
 function HitPoints(){
-    var targetHP = mmCRValues[creaturecr][5];
+    var targetHP = mmCRValues[creatureCR][5];
     var currentHP = 0;
     var lastValue = 1000;
     var currentMultiplier = 0;
     var dieSize = 8;
-    var conMod = parseInt((creatureStats[2].bonus()))
+    var conMod = creatureStats[2].bonus()
 
     if (outputSize == "Large") {dieSize = 10;}
     if (outputSize == "Small") {dieSize = 6;}
@@ -822,4 +840,36 @@ function HitPoints(){
     if (conMod != 0) {returnstring = returnstring +  " + "  + (conMod * currentMultiplier)};    
     returnstring = returnstring + ")";
     return returnstring;
+}
+
+function Spellcasting_Trait(){    
+    return "The " + creatureName + " is a " + $('#mmSpellcasting').attr("data-level") + " level spellcaster. " +
+    " Its spellcasting ability is " + $('#mmSpellcasting').attr("data-ability") + 
+    " (spell save DC " + Spellcasting_DC($('#mmSpellcasting').attr("data-ability")) + ", +" +
+    SpellcastingAttack($('#mmSpellcasting').attr("data-ability")) + " to hit with spell attacks). The " +
+    creatureName + " has the following " + $('#mmSpellcasting').attr("data-spelllist") + " spells prepared:";
+}
+
+function Spellcasting_DC(abilityName){
+    
+    console.log(Number(creatureStats[3].bonus()) + " " + creatureCR + " " + (mmCRValues[creatureCR]));
+    switch(abilityName.toLowerCase()){
+        case "intelligence":
+            return (8 + Number(creatureStats[3].bonusplus()));
+        case "wisdom":
+            return (8 + Number(creatureStats[4].bonusplus()));
+        case "charisma":
+            return (8 + Number(creatureStats[5].bonusplus()));
+    }
+}
+
+function SpellcastingAttack(abilityName){
+switch(abilityName.toLowerCase()){
+        case "intelligence":
+            return (Number(creatureStats[3].bonusplus()));
+        case "wisdom":
+            return (Number(creatureStats[4].bonusplus()));
+        case "charisma":
+            return (Number(creatureStats[5].bonusplus()));
+    }
 }

@@ -35,8 +35,9 @@ function elementClass(contentNode) {
       for (let i = 0; i < this.attributes.length; i++) {
         let attribute = this.attributes[i];
         let abilityShortName = attribute.name.split('-')[1];
+       
         root.getElementById(abilityShortName).textContent =
-           abilityText(attribute.value);
+           abilityText(parseInt(attribute.value) + parseInt(race_modifiers[i]));
       }
     }
   }

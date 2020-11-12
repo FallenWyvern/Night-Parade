@@ -48,15 +48,14 @@
       </property-line>
     </top-stats>
 
-    <div id = 'mmAbilities'>
+    <div id = 'mmAbilities'>        
         <property-block>        
                 <h4>Spellcasting.</h4>
-                <p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is 
-                Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte has following 
-                cleric spells prepared:</p>
+                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
+                </p>
                 <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
                 <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
-        </property-block>        
+        </property-block>      
     </div>
     
     <h3>Actions</h3>
