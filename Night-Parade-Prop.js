@@ -5,6 +5,7 @@ var npSkinThickness = [ "normal", "thick", "waxy", "woody", "stoney", "metallic"
 var npSkinColors = [ "red", "orange", "yellow", "green", "blue", "indigo", "purple", "white", "black", "natural color of their race"];
 var npSavingThrows = [ "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma"];
 var npDamageTypes = [ "cold", "poison", "acid", "psychic", "fire", "necrotic", "radiant", "force", "thunder", "lightning"];
+var numberWords  = ["one", "two", "three", "four", "five", "six", "seven", "eight"];
 
 var creatureName = "Night Parade ";
 var creatureRace = "";
@@ -114,7 +115,9 @@ function DoTheThing(){
     $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP)");  
     $('#mmHP').text(HitPoints());
     $('#mmName').text("Night Parade " + creatureName);
-    $('#mmSpellcasting').text(Spellcasting_Trait());
+    if ($('#mmSpellcasting').text().length > 0){
+        $('#mmSpellcasting').text(Spellcasting_Trait());
+    }
   });   
 };
 
@@ -486,13 +489,34 @@ function LocomotionList(){
 function Language(){
     var languages = $('#mmLanguage').text().replace("Languages", "").trim();
     var numString = 1;
+
     if (languages.includes("two")) {numString = 2;}
     if (languages.includes("three")) {numString = 3;}
     if (languages.includes("four")) {numString = 4;}
     if (languages.includes("five")) {numString = 5;}
     if (languages.includes("six")) {numString = 6;}
+    if (languages.includes("seven")) {numString = 7;}
+    if (languages.includes("eight")) {numString = 8;}
 
-    console.log("LANGUAGE COUNT: " + numString);
+    var importLanguage = raceLanguage.trim();
+    var existingLanugage = "";
+    if (languages.includes("plus")){
+        languages.split("plus")[0].trim();
+    }
+
+    if (importLanguage.length == 0) {
+        return;
+    } else {
+        numString--;
+
+        if (numString == 0){
+            $('#mmLanguage').html("<h4>Languages</h4> " + raceLanguage);
+        } else {            
+            var outputString = "<h4>Languages</h4> " + raceLanguage + ", " + existingLanugage + ", plus any " + numberWords[numString-1] + " language";
+            if (numString > 1) {outputString += "s.";} else {outputString +=".";}
+            $('#mmLanguage').html(outputString);
+        }
+    }    
 }
 
 function FeaturesCause(){
@@ -940,7 +964,7 @@ function Spellcasting_Trait(){
 }
 
 function Spellcasting_DC(abilityName){
-    
+    console.log("ABILITY: " + abilityName);
     console.log(Number(creatureStats[3].bonus()) + " " + creatureCR + " " + (mmCRValues[creatureCR]));
     switch(abilityName.toLowerCase()){
         case "intelligence":
