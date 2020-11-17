@@ -142,6 +142,6 @@ function modifyResults(){
 
 function CoinFlip(){
     var prob1 = Math.floor(Math.random() * 2) +1;
-    if (prob1 == 0) return false;
+    if (prob1 == 1) return false;
     return true;
 }
