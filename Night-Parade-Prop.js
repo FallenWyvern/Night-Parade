@@ -62,7 +62,7 @@ function DoTheThing(){
     creatureSpecialAbilityCount = 0;
     
     // Racial mods
-    modifyResults();
+    modifyResults();    
     
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
 
@@ -110,6 +110,14 @@ function DoTheThing(){
     SavingThrows();
     PassivePerception();
     Language();
+        
+    if (raceAbility.length > 0){        
+        $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+    }
+    
+    if (raceAttacks.length > 0){
+        $('#mmAttacks').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+    }
 
     $('#test').append(Features());  
     $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP)");  
@@ -120,6 +128,46 @@ function DoTheThing(){
     }
   });   
 };
+
+function UpdateRacialAbilities(incomingAbility){    
+    var returnString = incomingAbility;  
+    returnString = returnString.split(/"_STR_"/).join(creatureStats[0].bonus());
+    returnString = returnString.split("_STRP_").join(creatureStats[0].bonusplus());
+    returnString = returnString.split("_STRDC_").join(Number(8 + creatureStats[0].bonusplus()));
+
+    returnString = returnString.split("_DEX_").join(creatureStats[1].bonus());
+    returnString = returnString.split("_DEXP_").join(creatureStats[1].bonusplus());
+    returnString = returnString.split("_DEXDC_").join(Number(8 + creatureStats[1].bonusplus()));
+
+    returnString = returnString.split("_CON_").join(creatureStats[2].bonus());
+    returnString = returnString.split("_CONP_").join(creatureStats[2].bonusplus());
+    returnString = returnString.split("_CONDC_").join(Number(8 + creatureStats[2].bonusplus()));
+
+    returnString = returnString.split("_INT_").join(creatureStats[3].bonus()); 
+    returnString = returnString.split("_INTP_").join(creatureStats[3].bonusplus());
+    returnString = returnString.split("_INTDC_").join(Number(8 + creatureStats[3].bonusplus()));
+    
+    returnString = returnString.split("_WIS_").join(creatureStats[4].bonus());
+    returnString = returnString.split("_WISP_").join(creatureStats[4].bonusplus());
+    returnString = returnString.split("_WISDC_").join(Number(8 + creatureStats[4].bonusplus()));
+
+    returnString = returnString.split("_CHA_").join(creatureStats[5].bonus());
+    returnString = returnString.split("_CHAP_").join(creatureStats[5].bonusplus());
+    returnString = returnString.split("_CHADC_").join(Number(8 + creatureStats[5].bonusplus()));
+    
+    var dragonBreath = "2d6";
+    if (creatureCR > 5) dragonBreath = "3d6";
+    if (creatureCR > 11) dragonBreath = "4d6";
+    if (creatureCR > 16) dragonBreath = "5d6";
+    returnString = returnString.split("_DRAGONBORNBREATH_").join(dragonBreath);
+    returnString = returnString.split("_DOUBLEPROF_").join((Number(mmCRValues[creatureCR][1]) * 2));
+
+    return returnString;
+}
+
+function ExpandAttack(incomingAttack){
+    return "haha";
+}
 
 function Features(){
     var returnString = FeaturesCause();
@@ -278,13 +326,27 @@ function PassivePerception(){
     var prof = Number(mmCRValues[creatureCR][1]);
  
     if (!$('#mmSkills').text().includes("Perception")) { prof = 0; }
- 
+    
+    var existingSenses = "";
     var passPer = "passive Perception " + (10 + wisMod + prof);
+
     if (senses.trim().length == 0){
-        $('#mmSenses').html("<h4>Senses</h4> " + passPer);
+        existingSenses = "<h4>Senses</h4> " + passPer;
+        raceSenses.split(',').forEach(element => {             
+            if (!existingSenses.includes(element.trim())){ 
+                existingSenses += ", " + element.trim(); 
+            } 
+        })        
     } else {
-        $('#mmSenses').html("<h4>Senses</h4> " + passPer + ", " + senses);
+        existingSenses = "<h4>Senses</h4> " + passPer + ", " + senses;
+        raceSenses.split(',').forEach(element => {             
+            if (!existingSenses.includes(element.trim())){ 
+                existingSenses += ", " + element.trim(); 
+            } 
+        })        
     }
+
+    $('#mmSenses').html(existingSenses);
 }
 
 function numberOfSpecials(){
@@ -427,8 +489,10 @@ function Locomotion(){
         if (element == "swimming") {             
             if (swimming){
                 if (!amphibious){
-                    $('#mmAbilities').append("<property-block> <h4>Amphibious.</h4> <p>The " + creatureName + 
-                    " can breathe air and water.</p> </property-block>");  
+                    if (!$('#mmAbilities').text().includes("Amphibious")){
+                        $('#mmAbilities').append("<property-block> <h4>Amphibious.</h4> <p>The " + creatureName + 
+                        " can breathe air and water.</p> </property-block>");
+                    }  
                     amphibious = true;
                 }
             } else {
@@ -500,19 +564,29 @@ function Language(){
 
     var importLanguage = raceLanguage.trim();
     var existingLanugage = "";
-    if (languages.includes("plus")){
-        languages.split("plus")[0].trim();
+
+    if (languages.includes("plus")){        
+         existingLanugage = languages.split("plus")[0].trim();         
     }
 
-    if (importLanguage.length == 0) {
+    if (importLanguage.length == 0) {        
         return;
-    } else {
-        numString--;
-
-        if (numString == 0){
+    } else {                
+        numString = numString - importLanguage.split(',').length;
+        
+        if (numString <= 0 && !(languages.includes("plus"))){            
             $('#mmLanguage').html("<h4>Languages</h4> " + raceLanguage);
-        } else {            
-            var outputString = "<h4>Languages</h4> " + raceLanguage + ", " + existingLanugage + ", plus any " + numberWords[numString-1] + " language";
+        } else {                        
+            var outputString = "<h4>Languages</h4> " + raceLanguage;            
+            
+            if (languages.includes("plus")){                                
+                outputString += ", " + existingLanugage;
+            }
+
+            if ((numString-1) > 0){
+                outputString += ", plus any " + numberWords[numString-1] + " language";
+            }
+            
             if (numString > 1) {outputString += "s.";} else {outputString +=".";}
             $('#mmLanguage').html(outputString);
         }
@@ -699,7 +773,7 @@ function bigFeatures(randomFeature){
             $('#mmAbilities').append("<property-block> <h4>Cloud Kill Immunity.</h4><p> The " + creatureName  + " is immune to the <i>cloudkill</i> spell.</p></property-block>");
 
             $('#mmAttacks').append("<property-block> <h4>Death Cloud (Recharge long rest).</h4><p>The " + creatureName  + " can cast <i>cloudkill</i> " +
-            "without using a spell slot or material components. The spell stays centered on the " + creatureName + " and the saving throw for this " +
+            "without using a spell slot or material components. The spell stays centered on the " + creatureName + " and the DC for this " +
             " effect is " + DC + ".</p></property-block>");
 
             returnString += "A thick yellow cloud hangs and clings to the " + creatureName + ".";

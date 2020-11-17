@@ -34,6 +34,8 @@
         <h4>Saving Throws</h4>
         <p>Int +9, Wis +6</p>            
       </property-line>
+      <property-line id='mmResistance'>
+      </property-line>
       <property-line id='mmSenses'>
         <h4>Senses</h4>
         <p></p>

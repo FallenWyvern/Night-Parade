@@ -34,7 +34,7 @@
         <h4>Saving Throws</h4>
         <p>Dex +6, Int +4</p>            
       </property-line>
-      <property-line>
+      <property-line id='mmResistance'>
         <h4>Damage Resistance</h4>
         <p>poison</p>
       </property-line>
