@@ -15,7 +15,7 @@
       </property-line>
       <property-line>
         <h4>Speed</h4>
-        <p id='mmSpeed'><span id='mmBaseSpeed'>30</span> ft.</p>        
+        <p id='mmSpeed'><span id='mmBaseSpeed'>30</span> ft.<span id='mmExtraSpeed'></span></p>        
         </span>
       </property-line>
       <div id='mmStats'>
@@ -26,7 +26,7 @@
                         data-wis="14"
                         data-cha="11"></abilities-block>
       </div>
-      <property-line>
+      <property-line id='mmSkills'>
         <h4>Skills</h4>
         <p>Medicine +4, Religion +2</p>
       </property-line>
@@ -34,11 +34,11 @@
         <h4>Saving Throws</h4>
         <p>Str +2</p>            
       </property-line>
-      <property-line>
+      <property-line id='mmSenses'>
         <h4>Senses</h4>
-        <p>passive Perception 12</p>
+        <p></p>
       </property-line>
-      <property-line>
+      <property-line id='mmLanguage'>
         <h4>Languages</h4>
         <p>Any one language (usually Common)</p>
       </property-line>

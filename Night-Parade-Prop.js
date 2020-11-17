@@ -70,8 +70,10 @@ function DoTheThing(){
     $('#mmRace').text(race);
     outputSize = $('#mmSize').text(); 
     var cr = $('#mmCR').text().split('(')[0].trim();
-
     var bonus = $('#mmStats').html().split('=');
+
+    $('#mmBaseSpeed').text(raceBaseSpeed);
+    if (raceSpeed.trim().length > 0) { $('#mmExtraSpeed').text(", " + raceSpeed); }
     
     creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
     creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
@@ -103,7 +105,10 @@ function DoTheThing(){
     }
     
     MutatedAttacks();
-    SavingThrows();            
+    Skills();
+    SavingThrows();
+    PassivePerception();
+    Language();
 
     $('#test').append(Features());  
     $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP)");  
@@ -142,6 +147,57 @@ function Features(){
     return returnString;
 }
 
+function Skills(){
+    var skills = $('#mmSkills').text().replace("Skills", "").trim().split(",");
+    var finalString = "";
+
+    skills.forEach(element => {
+        finalString += Skill (element) + ", ";
+    });
+
+    $('#mmSkills').html("<h4>Skills</h4> " + finalString.substr(0, finalString.length - 2));
+}
+
+function Skill(skill = ""){
+    var parsedSkill = skill.trim().split('+')[0].trim();
+    var prof = Number(mmCRValues[creatureCR][1]);
+    
+    console.log(skill + " -" + parsedSkill + "-");
+
+    switch (parsedSkill){
+        case "Athletics":
+            return parsedSkill + " +" + (Number(creatureStats[0].bonus()) + prof);
+            break;
+        case "Acrobatics":
+        case "Sleight of Hand":
+        case "Stealth":
+            return parsedSkill + " +" + (Number(creatureStats[1].bonus()) + prof);
+            break;
+        case "Arcana":
+        case "History":
+        case "Investigation":
+        case "Nature":
+        case "Religion":
+            return parsedSkill + " +" + (Number(creatureStats[3].bonus()) + prof);
+            break;
+        case "Animal Handling":
+        case "Insight":
+        case "Medicine":
+        case "Perception":
+        case "Survival":
+            return parsedSkill + " +" + (Number(creatureStats[4].bonus()) + prof);
+            break;
+        case "Deception":
+        case "Intimidation":
+        case "Performance":
+        case "Persuasion":
+            return parsedSkill + " +" + (Number(creatureStats[5].bonus()) + prof);
+            break;
+        default:
+            return skill;
+    }
+}
+
 function SavingThrows(){
     var saves = $('#mmSaves').text().replace("Saving Throws", "").trim();
     var save1 = SavingThrow();
@@ -162,7 +218,7 @@ function SavingThrows(){
             save2 = SavingThrow();
         }
 
-        $('#mmSaves').html("<h4>Saving Throws.</h4> " +
+        $('#mmSaves').html("<h4>Saving Throws</h4> " +
         "<p>" + save1 + ", " + save2) + "</p>";  
     } else {
         var originalSaves = "";
@@ -211,6 +267,21 @@ function SavingThrow(abilityInput = ""){
     
     if ($('#mmSaves').text().includes(stat)) { totalReturn = ""; }  
     return (totalReturn).capitalize();
+}
+
+function PassivePerception(){
+    var senses = $('#mmSenses').text().replace("Senses", "");
+    var wisMod = Number(creatureStats[4].bonus());
+    var prof = Number(mmCRValues[creatureCR][1]);
+ 
+    if (!$('#mmSkills').text().includes("Perception")) { prof = 0; }
+ 
+    var passPer = "passive Perception " + (10 + wisMod + prof);
+    if (senses.trim().length == 0){
+        $('#mmSenses').html("<h4>Senses</h4> " + passPer);
+    } else {
+        $('#mmSenses').html("<h4>Senses</h4> " + passPer + ", " + senses);
+    }
 }
 
 function numberOfSpecials(){
@@ -319,6 +390,7 @@ function Locomotion(){
     var oozing = false;
     var amorphous = false;    
     var spiderclimb = false;
+    var climb = false;
     var amphibious = false;
 
     var list = LocomotionList(); 
@@ -332,19 +404,22 @@ function Locomotion(){
     $('#mmBaseSpeed').text(creatureBaseSpeed);
 
     var fly = "";
-    list.forEach((element) => {              
-        if (element == "flying") {             
-            if (flying){
-                fly = ", fly " + creatureBaseSpeed + " ft. (hover)";
-            } else {
-                flying = true;      
-                fly = ", fly " + creatureBaseSpeed + " ft.";
-            }                                         
-        }
-    });
+    if (!raceSpeed.includes("fly")){
+        list.forEach((element) => {              
+            if (element == "flying") {             
+                if (flying){
+                    fly = ", fly " + creatureBaseSpeed + " ft. (hover)";
+                } else {
+                    flying = true;      
+                    fly = ", fly " + creatureBaseSpeed + " ft.";
+                }                                         
+            }
+        });
     $('#mmSpeed').append(fly);
+    } 
 
     var swim = ""
+    if (!raceSpeed.includes("swim")){
     list.forEach((element) => {                 
         if (element == "swimming") {             
             if (swimming){
@@ -360,7 +435,8 @@ function Locomotion(){
         }
     });
     $('#mmSpeed').append(swim);
-
+    }
+    
     var ooze = "";
     list.forEach((element) => {                  
         if (element == "oozing") {             
@@ -386,6 +462,7 @@ function Locomotion(){
     if (flying) { returnString += " and flying"; }
     if (oozing) { returnString += " and oozing"; }
     if (swimming) { returnString += " and swimming"; }
+    if (climb) {returnString += " and climbing"; }
     return returnString;
 }
 
@@ -404,6 +481,18 @@ function LocomotionList(){
     }
 
     return listofspeeds;
+}
+
+function Language(){
+    var languages = $('#mmLanguage').text().replace("Languages", "").trim();
+    var numString = 1;
+    if (languages.includes("two")) {numString = 2;}
+    if (languages.includes("three")) {numString = 3;}
+    if (languages.includes("four")) {numString = 4;}
+    if (languages.includes("five")) {numString = 5;}
+    if (languages.includes("six")) {numString = 6;}
+
+    console.log("LANGUAGE COUNT: " + numString);
 }
 
 function FeaturesCause(){

@@ -15,7 +15,7 @@
       </property-line>
       <property-line>
         <h4>Speed</h4>
-        <p id='mmSpeed'><span id='mmBaseSpeed'>30</span> ft.</p>        
+        <p id='mmSpeed'><span id='mmBaseSpeed'>30</span> ft.<span id='mmExtraSpeed'></span></p>         
         </span>
       </property-line>
       <div id='mmStats'>
@@ -26,7 +26,7 @@
                         data-wis="11"
                         data-cha="10"></abilities-block>
       </div>
-      <property-line>
+      <property-line id='mmSkills'>
         <h4>Skills</h4>
         <p>Acrobatics +6, Deception +3, Perception +3, Stealth +9</p>
       </property-line>
@@ -38,11 +38,11 @@
         <h4>Damage Resistance</h4>
         <p>poison</p>
       </property-line>
-      <property-line>
+      <property-line id='mmSenses'>
         <h4>Senses</h4>
-        <p>passive Perception 13</p>
+        <p></p>
       </property-line>
-      <property-line>
+      <property-line id='mmLanguage'>
         <h4>Languages</h4>
         <p>Thieves cant plus any two languages</p>
       </property-line>
