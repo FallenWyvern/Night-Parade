@@ -14,6 +14,7 @@ var creatureBaseSpeed = 0;
 var outputSize = "";
 var creatureStats = [];
 var creatureSpecialAbilityCount = 0;
+var buildChanged = false;
 
 var mmCRValues = {
     "0": ["0", "2", "13", "3", "10", 3],
@@ -60,15 +61,19 @@ function DoTheThing(){
     outputSize = "";
     creatureStats = [];
     creatureSpecialAbilityCount = 0;
+    buildChanged = false;
     
     // Racial mods
     modifyResults();    
-    console.log("Skills: " + raceSkills);
+    
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
 
     creatureName = $('#mmName').text(); 
     creatureRace += $('#mmRace').text(); 
+    
     $('#mmRace').text(race);
+    $('#mmSize').text(raceSize); 
+    
     outputSize = $('#mmSize').text(); 
     var cr = $('#mmCR').text().split('(')[0].trim();
     var bonus = $('#mmStats').html().split('=');
@@ -100,17 +105,17 @@ function DoTheThing(){
     }
     console.log("CR:" + mmCRValues[creatureCR] + " | Abilities: " + creatureSpecialAbilityCount);
 
-    creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());
-    if (outputSize != "Small"){
-        outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
-    }
+    creatureBaseSpeed = parseInt($('#mmBaseSpeed').text());      
+    outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
+    if (outputSize != "Medium") { buildChanged = true; }    
     
     MutatedAttacks();
     Skills();
     SavingThrows();
     PassivePerception();
     Language();
-        
+    EnergyStuff();
+    
     if (raceAbility.length > 0){        
         $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
     }
@@ -126,8 +131,13 @@ function DoTheThing(){
     if ($('#mmSpellcasting').text().length > 0){
         $('#mmSpellcasting').text(Spellcasting_Trait());
     }
+    
   });   
 };
+
+function EnergyStuff(){
+    
+}
 
 function UpdateRacialAbilities(incomingAbility){    
     var returnString = incomingAbility;  
@@ -200,13 +210,18 @@ function Features(){
 
 function Skills(){    
     if (raceSkills.length > 0){
-        $('#mmSkills').append(", "  + raceSkills);
+        var splitSkills = raceSkills.split(',');
+        splitSkills.forEach(element => {
+            if (!$('#mmSkills').text().includes(element.trim())){
+                $('#mmSkills').append(", "  + element);
+            }
+        });        
     }
     var skills = $('#mmSkills').text().replace("Skills", "").trim().split(",");
     var finalString = "";
 
-    skills.forEach(element => {
-        finalString += Skill (element) + ", ";
+    skills.forEach(element => {        
+        finalString += Skill (element) + ", ";        
     });
 
     $('#mmSkills').html("<h4>Skills</h4> " + finalString.substr(0, finalString.length - 2));
@@ -370,14 +385,19 @@ function SkinType(){
 
     var temp = npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
     console.log("TYPE: " + temp);
+
     if (temp != "normal"){
         returnString += "They have an unusual hide that feels " + temp + ". " + SkinPattern();
         
         var addendum = " (natural armor)";
         if ($('#mmAC').text().includes('mage armor')) { 
-            addendum = " (" + (10 + (npSkinThickness.indexOf(temp) * 2) + 3) + " with <i>mage armor</i>)"; 
+            addendum = " (" + ((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2) + 3) + " with <i>mage armor</i>)"; 
         }
-        $('#mmAC').html((10 + (npSkinThickness.indexOf(temp) * 2)) + addendum);
+        $('#mmAC').html(((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2)) + addendum);
+    } else {
+        if (raceACBonus != 0){
+            $('#mmAC').html((10 + raceACBonus + creatureStats[1].bonus()) + " (natural armor)");
+        }
     }
 
     return returnString; 
@@ -432,21 +452,45 @@ function SkinColor(){
 function Abilities(){
     var returnString = "";
     
-    if (outputSize == "Small"){
-        $('#mmSize').text("Small");
-        $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
-        " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
+    if (buildChanged){
+        console.log(outputSize + " " + raceSize);
+        if (outputSize == "Small"){
+            switch (raceSize){
+                case "Small":
+                    $('#mmSize').text("Small");
+                    break;
+                case "Large":
+                    $('#mmSize').text("Medium");
+                    break;
+                default:
+                    $('#mmSize').text("Small");
+                    break;
+            }
+            
+            $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
+            " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
 
-        returnString += ", and are smaller than most " + creatureRace.toLowerCase() + "s";
-    };
+            returnString += ", and are smaller than most " + racePlural;
+        };
 
-    if (outputSize == "Large"){
-        $('#mmSize').text("Large");
-        $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
-        " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
-        returnString += ", and are larger than most other " + creatureRace.toLowerCase() + "s";
-    }; 
-    
+        if (outputSize == "Large"){
+            switch (raceSize){
+                case "Small":
+                    $('#mmSize').text("Medium");
+                    break;
+                case "Large":
+                    $('#mmSize').text("Large");
+                    break;
+                default:
+                    $('#mmSize').text("Large");
+                    break;
+            }
+            
+            $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
+            " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
+            returnString += ", and are larger than most other " + racePlural;
+        }; 
+    }
     return returnString;
 }
 
@@ -840,7 +884,7 @@ function bigFeatures(randomFeature){
         case 38:
             $('#mmAbilities').append("<property-block> <h4>Powerful Nose.</h4><p> The " + creatureName  + " has advantage on Wisdom (Perception) checks made using scent.</p></property-block>");
             
-            returnString += "The " + creatureName + "'s head is more lupine than other " + creatureRace + "s";
+            returnString += "The " + creatureName + "'s head is more lupine than other " + racePlural;
             break;
         case 39:
         case 40:
@@ -926,8 +970,8 @@ function bigFeatures(randomFeature){
             returnString += "The " + creatureName + " movements seem to echo themselves, as though each action the creature takes has been run through a dozen iterations until they found the right move to take.";
         case 63:
         case 64:
-             $('#mmAbilities').append("<property-block> <h4>Displacement.</h4><p> Whenever a creature rolls a weapon attack targeting the " + creatureName  + ", they must roll 1d20." +
-             " On a 11+, the attack targets a different random creature within the attacker's reach.</p></property-block>");
+             $('#mmAbilities').append("<property-block> <h4>Displacement.</h4><p> Whenever a creature rolls a melee attack targeting the " + creatureName  + ", they must roll 1d20." +
+             " On a 11+, the attack targets a different random creature within the attacker's reach. If there are no other creatures, they target the " + creatureName + "</p></property-block>");
             
             returnString += "The " + creatureName + " seems to be in a dozen different places all at the same time.";
             break;

@@ -34,7 +34,13 @@
         <h4>Saving Throws</h4>
         <p>Str +2</p>            
       </property-line>
+      <property-line id='mmVul'>
+      </property-line>
       <property-line id='mmResistance'>
+      </property-line>
+      <property-line id='mmImmunity'>
+      </property-line>
+      <property-line id='mmCImmunity'>
       </property-line>
       <property-line id='mmSenses'>
         <h4>Senses</h4>
