@@ -120,7 +120,7 @@ function DoTheThing(){
     }
 
     $('#test').append(Features());  
-    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP)");  
+    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");  
     $('#mmHP').text(HitPoints());
     $('#mmName').text("Night Parade " + creatureName);
     if ($('#mmSpellcasting').text().length > 0){

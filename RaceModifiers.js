@@ -173,7 +173,7 @@ function modifyResults(){
 
             raceAttacks = "<property-block> <h4>Title.</h4> <p> <i>Type Weapon Attack: </i>+x to hit, reach 5 ft., one target. <i>Hit:</i> Description.</p></property-block>";
             raceAttacks = "<property-block> <h4>Title.</h4><p>description.</p></property-block>";
-           
+            raceAttacks = "";
             break;
     }
 }
