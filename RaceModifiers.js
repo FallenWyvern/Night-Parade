@@ -544,10 +544,10 @@ function modifyResults(){
             raceSenses = "darkvision 60 ft.";
             raceSkills = "";
             raceACBonus = 0;
-            conditionImmune = "";
-            damageImmune = "";
+            conditionImmune = "exhaustion, poison";
+            damageImmune = "poison";
             damageResist = "";
-            damageVul = "";
+            damageVul = "bludgeoning";
             
             raceAbility = "<property-block> <h4>Title.</h4><p>description.</p></property-block>";
             raceAbility = "";

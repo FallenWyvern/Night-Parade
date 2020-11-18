@@ -136,7 +136,37 @@ function DoTheThing(){
 };
 
 function EnergyStuff(){
-    
+    if (damageVul.length > 0){
+        if ($('#mmVul').text().trim().length > 0){                
+            $('#mmVul').append(damageVul);
+        } else {        
+            $('#mmVul').html("<h4>Damage Vulnerability </h4><p>" + damageVul + "</p>");
+        }
+    }
+
+    if (damageResist.length > 0) {
+        if ($('#mmResistance').text().trim().length > 0){                
+            $('#mmResistance').append(damageResist);
+        } else {        
+            $('#mmResistance').html("<h4>Damage Resistance </h4><p>" + damageResist + "</p>");
+        }
+    }
+
+    if (damageImmune.length > 0){
+        if ($('#mmImmunity').text().trim().length > 0){                
+            $('#mmImmunity').append(damageImmune);
+        } else {        
+            $('#mmImmunity').html("<h4>Damage Immunity </h4><p>" + damageImmune + "</p>");
+        }
+    }
+
+    if (conditionImmune.length > 0){
+        if ($('#mmCImmunity').text().trim().length > 0){                
+            $('#mmCImmunity').append(conditionImmune);
+        } else {        
+            $('#mmCImmunity').html("<h4>Condition Immunity </h4><p>" + conditionImmune + "</p>");
+        }        
+    }
 }
 
 function UpdateRacialAbilities(incomingAbility){    
