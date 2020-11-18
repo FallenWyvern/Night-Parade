@@ -63,7 +63,7 @@ function DoTheThing(){
     
     // Racial mods
     modifyResults();    
-    
+    console.log("Skills: " + raceSkills);
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
 
     creatureName = $('#mmName').text(); 
@@ -116,7 +116,7 @@ function DoTheThing(){
     }
     
     if (raceAttacks.length > 0){
-        $('#mmAttacks').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+        $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
     }
 
     $('#test').append(Features());  
@@ -131,7 +131,7 @@ function DoTheThing(){
 
 function UpdateRacialAbilities(incomingAbility){    
     var returnString = incomingAbility;  
-    returnString = returnString.split(/"_STR_"/).join(creatureStats[0].bonus());
+    returnString = returnString.split("_STR_").join(creatureStats[0].bonus());
     returnString = returnString.split("_STRP_").join(creatureStats[0].bonusplus());
     returnString = returnString.split("_STRDC_").join(Number(8 + creatureStats[0].bonusplus()));
 
@@ -198,7 +198,10 @@ function Features(){
     return returnString;
 }
 
-function Skills(){
+function Skills(){    
+    if (raceSkills.length > 0){
+        $('#mmSkills').append(", "  + raceSkills);
+    }
     var skills = $('#mmSkills').text().replace("Skills", "").trim().split(",");
     var finalString = "";
 
