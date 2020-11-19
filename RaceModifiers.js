@@ -539,7 +539,7 @@ function modifyResults(){
             racePlural = "skeletons";
             raceBaseSpeed = "30";
             raceSpeed = "";
-            raceLanguage = "can't speak but understands the languages it knew in life";
+            raceLanguage = "Can't speak but understands the languages it knew in life";
             raceSize = "Medium";
             raceSenses = "darkvision 60 ft.";
             raceSkills = "";
@@ -554,6 +554,77 @@ function modifyResults(){
 
             raceAttacks = "<property-block> <h4>Title.</h4> <p> <i>Type Weapon Attack: </i>+x to hit, reach 5 ft., one target. <i>Hit:</i> Description.</p></property-block>";
             raceAttacks = "<property-block> <h4>Title.</h4><p>description.</p></property-block>";
+            raceAttacks = "";
+            break;
+        case "tiefling" :
+            race_modifiers[0] = 0;   
+            race_modifiers[1] = 0;
+            race_modifiers[2] = 0;
+            race_modifiers[3] = 1;
+            race_modifiers[4] = 0;
+            race_modifiers[5] = 2;
+            racePlural = "tieflings";
+            raceBaseSpeed = "30";
+            raceSpeed = "";
+            raceLanguage = "Common, Infernal";
+            raceSize = "Medium";
+            raceSenses = "darkvision 60 ft.";
+            raceSkills = "";
+            raceACBonus = 0;
+            conditionImmune = "";
+            damageImmune = "";
+            damageResist = "fire";
+            damageVul = "";
+            
+            raceAbility = "<property-block> <h4>Infernal Legacy.</h4><p>The tiefling knows the <i>Thaumaturgy</i> cantrip. _TIEFLINGSPELLS_ The tiefling uses Charisma for its Spellcasting Ability for these Spells. (+_CHAP_ to hit, DC _CHADC_)</p></property-block>";            
+            raceAttacks = "";
+            break;
+        case "troglodyte" :
+            race_modifiers[0] = 2;   
+            race_modifiers[1] = 0;
+            race_modifiers[2] = 2;
+            race_modifiers[3] = -4;
+            race_modifiers[4] = 0;
+            race_modifiers[5] = -4;
+            racePlural = "troglodytes";
+            raceBaseSpeed = "30";
+            raceSpeed = "";
+            raceLanguage = "Troglodyte";
+            raceSize = "Medium";
+            raceSenses = "darkvision 60 ft.";
+            raceSkills = "";
+            raceACBonus = 1;
+            conditionImmune = "";
+            damageImmune = "";
+            damageResist = "";
+            damageVul = "";
+            
+            raceAbility = "<property-block> <h4>Chameleon Skin. </h4><p>The troglodyte has advantage on Dexterity (Stealth) checks made to hide.</p></property-block>";            
+            raceAbility += "<property-block> <h4>Stench. </h4><p>Any creature other than a troglodyte that starts its turn within 5 feet of the troglodyte must succeed on a DC _CONDC_ Constitution saving throw or be poisoned until the start of the creature's next turn. On a successful saving throw, the creature is immune to the stench of all troglodytes for 1 hour.</p></property-block>"; 
+            raceAbility += "<property-block> <h4>Sunlight Sensitivity. </h4><p>While in sunlight, the troglodyte has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</p></property-block>"; 
+            raceAttacks = "";
+            break;
+        case "zombie" :
+            race_modifiers[0] = 1;   
+            race_modifiers[1] = 0;
+            race_modifiers[2] = 2;
+            race_modifiers[3] = -6;
+            race_modifiers[4] = -4;
+            race_modifiers[5] = -4;
+            racePlural = "zombies";
+            raceBaseSpeed = "30";
+            raceSpeed = "";
+            raceLanguage = "Can't speak but understands the languages it knew in life";
+            raceSize = "Medium";
+            raceSenses = "";
+            raceSkills = "";
+            raceACBonus = 0;
+            conditionImmune = "poisoned";
+            damageImmune = "poison";
+            damageResist = "";
+            damageVul = "";
+            
+            raceAbility = "<property-block> <h4>Undead Fortitude.</h4><p>If damage reduces the zombie to 0 hit points, it must make a Constitution saving throw with a DC of 5 + the damage taken, unless the damage is radiant or from a critical hit. On a success, the zombie drops to 1 hit point instead.</p></property-block>";            
             raceAttacks = "";
             break;
         default :

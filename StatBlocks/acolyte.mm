@@ -30,9 +30,7 @@
         <h4>Skills</h4>
         <p>Medicine +4, Religion +2</p>
       </property-line>
-      <property-line id='mmSaves'> 
-        <h4>Saving Throws</h4>
-        <p>Str +2</p>            
+      <property-line id='mmSaves'>                     
       </property-line>
       <property-line id='mmVul'>
       </property-line>

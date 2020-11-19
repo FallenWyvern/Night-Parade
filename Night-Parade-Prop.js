@@ -67,6 +67,7 @@ function DoTheThing(){
     modifyResults();    
     
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
+    var template = $("#templateBlock option:selected").text();
 
     creatureName = $('#mmName').text(); 
     creatureRace += $('#mmRace').text(); 
@@ -88,11 +89,36 @@ function DoTheThing(){
     creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
     creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
     
-    // Update stats from Race
-    // Add special race abilities
+    creatureCR = cr;    
+    PassivePerception();
+    Language();
+    EnergyStuff();    
+
+    // Night Parade Stuff    
+    switch (template){
+        case "Night Parade":
+            NightParade();
+            break;
+        default:
+            break;
+    }
+
+    if (raceAbility.length > 0){        
+        $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+    }
     
-    creatureCR = cr;
-    
+    if (raceAttacks.length > 0){
+        $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
+    }
+    if ($('#mmSpellcasting').text().length > 0){
+        $('#mmSpellcasting').text(Spellcasting_Trait());
+    }
+    $('#mmHP').text(HitPoints());
+    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
+  });   
+};
+
+function NightParade(){
     creatureSpecialAbilityCount = numberOfSpecials();
     if (creatureCR.includes("/")){
         if (creatureSpecialAbilityCount >= 2){
@@ -112,28 +138,9 @@ function DoTheThing(){
     MutatedAttacks();
     Skills();
     SavingThrows();
-    PassivePerception();
-    Language();
-    EnergyStuff();
-    
-    if (raceAbility.length > 0){        
-        $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
-    }
-    
-    if (raceAttacks.length > 0){
-        $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
-    }
-
-    $('#test').append(Features());  
-    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");  
-    $('#mmHP').text(HitPoints());
-    $('#mmName').text("Night Parade " + creatureName);
-    if ($('#mmSpellcasting').text().length > 0){
-        $('#mmSpellcasting').text(Spellcasting_Trait());
-    }
-    
-  });   
-};
+    $('#test').append(Features());     
+    $('#mmName').text("Night Parade " + creatureName);        
+}
 
 function EnergyStuff(){
     if (damageVul.length > 0){
@@ -201,6 +208,23 @@ function UpdateRacialAbilities(incomingAbility){
     if (creatureCR > 16) dragonBreath = "5d6";
     returnString = returnString.split("_DRAGONBORNBREATH_").join(dragonBreath);
     returnString = returnString.split("_DOUBLEPROF_").join((Number(mmCRValues[creatureCR][1]) * 2));
+
+    if (returnString.includes("_TIEFLINGSPELLS_")){
+        var spellsString = "";
+
+        if (Number(mmCRValues[creatureCR][0]) >= 3){
+            spellsString += "It can cast the Hellish Rebuke spell as a 2nd-level spell once with this trait";
+        }         
+        if (Number(mmCRValues[creatureCR][0] >= 5)){
+            spellsString += " and it can cast the Darkness spell once with this trait"
+        }
+
+        if (Number(mmCRValues[creatureCR][0]) >= 3){
+            spellsString += ". The tiefling regains all uses of spellcasting with this trait once it finishes a long rest.";
+        }         
+
+        returnString = returnString.split("_TIEFLINGSPELLS_").join(spellsString);         
+    }
 
     return returnString;
 }
@@ -708,17 +732,17 @@ function MutatedAttacks(){
             case "claws":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
+                Number(3 + creatureStats[0].bonus()) + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case  "bite":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
+                Number(3 + creatureStats[0].bonus()) + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case "tentacle":
                 attack  += "<i>Melee Weapon Attack: </i>" + bonus +  
                 " to hit, reach 5 ft., one target. <i>Hit:</i> " +  
-                3 + creatureStats[0].bonus() + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
+                Number(3 + creatureStats[0].bonus()) + " (1d6 + " + creatureStats[0].bonus() +") slashing damage.";
                 break;
             case  "extra arm/leg":
                 attack  = "<property-block> <h4>" + (element+'').capitalize() + ".</h4> <p>" +

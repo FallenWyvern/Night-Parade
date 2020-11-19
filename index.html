@@ -29,6 +29,7 @@
         $( ".widget input[type=submit], .widget a, .widget button" ).button();
         $( "#npcBlock" ).selectmenu();
         $( "#raceBlock" ).selectmenu();
+        $( "#templateBlock" ).selectmenu();
         $( "button, input, a" ).click( function( event ) {
             $("#DivContent").empty();
             $("#test").empty();
@@ -104,6 +105,10 @@
       <option>Tiefling</option>
       <option>Troglodyte</option>
       <option>Zombie</option>
+    </select>   
+    <select name="TemplateBlock" id="templateBlock">      
+      <option selected="selected">None</option>      
+      <option>Night Parade</option>
     </select>   
     <div id="DivContent"></div>
     <div id="test" style="margin-left: 25px; margin-top: 25px; width: 400px;"></div>
