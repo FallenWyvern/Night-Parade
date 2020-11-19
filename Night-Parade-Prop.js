@@ -66,7 +66,8 @@ function DoTheThing(){
     // Racial mods
     modifyResults();    
     
-    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().toLowerCase() + ".mm", function() {    
+    console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
+    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {    
     var template = $("#templateBlock option:selected").text();
 
     creatureName = $('#mmName').text(); 
@@ -76,7 +77,7 @@ function DoTheThing(){
     $('#mmSize').text(raceSize); 
     
     outputSize = $('#mmSize').text(); 
-    var cr = $('#mmCR').text().split('(')[0].trim();
+    var cr = $('#mmCR').text().split('(')[0].trim();    
     var bonus = $('#mmStats').html().split('=');
 
     $('#mmBaseSpeed').text(raceBaseSpeed);
