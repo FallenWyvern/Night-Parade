@@ -66,17 +66,17 @@
             <p>The veteran makes two longsword attacks. If it has a shortsword drawn, it can also make a shortsword attack.</p>        
         </property-block> 
         <property-block>
-        <h4>Club.</h4>
+        <h4>Longsword.</h4>
         <p><i>Melee Weapon Attack:</i> +5 to hit, reach 5 ft., one target.
             <i>Hit:</i> 7 (1d8 + 3) slashing damage.</p>
         </property-block>
         <property-block>
-        <h4>Club.</h4>
+        <h4>Shortsword.</h4>
         <p><i>Melee Weapon Attack:</i> +5 to hit, reach 5 ft., one target.
             <i>Hit:</i> 6 (1d6 + 3) piercing damage.</p>
         </property-block>
         <property-block>
-        <h4>Club.</h4>
+        <h4>Heavy Crossbow.</h4>
         <p><i>Ranged Weapon Attack:</i> +3 to hit, range 100/400 ft., one target.
             <i>Hit:</i> 6 (1d10 + 1) piercing damage.</p>
         </property-block>
