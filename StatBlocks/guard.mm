@@ -62,7 +62,7 @@
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
         <property-block>
-        <h4>Club.</h4>
+        <h4>Spear.</h4>
         <p><i>Melee or Ranged Weapon Attack:</i> +3 to hit, reach 5 ft. or range 20/60 ft., one target.
             <i>Hit:</i> 4 (1d6 + 1) piercing damage, ot 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</p>
         </property-block>

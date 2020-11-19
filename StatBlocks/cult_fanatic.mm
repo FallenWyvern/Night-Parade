@@ -79,12 +79,7 @@
     <div id = 'mmAttacks'>
         <property-block>
         <h4>Dagger.</h4>
-        <p><i>Melee Weapon Attack:</i> +4 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 4 (1d4 + 2) piercing damage.</p>
-        </property-block>
-        <property-block>
-        <h4>Dagger.</h4>
-        <p><i>Ranged Weapon Attack:</i> +4 to hit, range 20/60 ft., one target.
+        <p><i>Melee or Ranged Weapon Attack:</i> +4 to hit, reach 5 ft. or range 20/60 ft., one target.
             <i>Hit:</i> 4 (1d4 + 2) piercing damage.</p>
         </property-block>
     </div>        

@@ -73,7 +73,7 @@
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
         <property-block>
-        <h4>Club.</h4>
+        <h4>Dagger.</h4>
         <p><i>Melee or Ranged Weapon Attack:</i> +5 to hit, reach 5 ft. or range 20/60, one target.
             <i>Hit:</i> 4 (1d4 + 2) piercing damage.</p>
         </property-block>

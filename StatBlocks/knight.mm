@@ -75,8 +75,8 @@
             <i>Hit:</i> 5 (2d6 + 3) slashing damage.</p>
         </property-block>
         <property-block>
-        <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, range 100/400 ft., one target.
+        <h4>Heavy Crossbow.</h4>
+        <p><i>Ranged Weapon Attack:</i> +2 to hit, range 100/400 ft., one target.
             <i>Hit:</i> 5 (1d10) piercing damage.</p>
         </property-block>
     </div>

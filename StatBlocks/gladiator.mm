@@ -74,7 +74,7 @@
                     <p>The gladiator makes three melee attacks or two ranged attacks.</p>        
         </property-block> 
         <property-block>
-        <h4>Club.</h4>
+        <h4>Spear.</h4>
         <p><i>Melee or Ranged Weapon Attack:</i> +7 to hit, reach 5 ft. and range 20/60, one target.
             <i>Hit:</i> 11 (2d6 + 4) piercing damage or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.</p>
         </property-block>
