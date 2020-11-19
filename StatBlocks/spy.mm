@@ -1,17 +1,17 @@
 <stat-block>
     <creature-heading>
-      <h1><span id='mmName'>Creature Name</span></h1>
+      <h1><span id='mmName'>Spy</span></h1>
       <h2><span id='mmSize'>Medium</span> humanoid (<span id='mmRace'>any race</span>), any alignment</h2>
     </creature-heading>
 
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p id='mmAC'>10</p>
+        <p id='mmAC'>12</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>        
-        <p id='mmHP'>aa (xdy + z)</p>        
+        <p id='mmHP'>27 (6d8)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -20,15 +20,15 @@
       </property-line>
       <div id='mmStats'>
         <abilities-block data-str="10"
-                        data-dex="10"
+                        data-dex="15"
                         data-con="10"
-                        data-int="10"
-                        data-wis="10"
-                        data-cha="10"></abilities-block>
+                        data-int="12"
+                        data-wis="14"
+                        data-cha="16"></abilities-block>
       </div>
       <property-line id='mmSkills'>
         <h4>Skills</h4>
-        <p></p>
+        <p>Deception +5, Insight +4, Investigation +5, Perception +6, Persuasion +5, Sleight of Hand +4, Stealth +4</p>
       </property-line>
       <property-line id='mmSaves'>                     
         <h4>Saving Throws</h4>
@@ -48,38 +48,40 @@
       </property-line>
       <property-line id='mmLanguage'>
         <h4>Languages</h4>
-        <p>Any one language (usually Common)</p>
+        <p>Any two languages</p>
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">1 (200 XP)</p>
       </property-line>
     </top-stats>
 
-    <div id = 'mmAbilities'>        
+    <div id = 'mmAbilities'>                     
         <property-block>        
-                <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
-                </p>
-                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
+                <h4>Cunning Action.</h4>
+                <p>On each of its turns, the spy can use a bonus action to take the Dash, Disengage, or Hide action.</p>        
         </property-block>      
         <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
+                <h4>Sneak Attack (1/Turn).</h4>
+                <p>The spy deals an extra 7 (2d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the spy that isn't incapacitated and the spy doesn't have disadvantage on the attack roll.</p>        
         </property-block>      
     </div>
     
     <h3>Actions</h3>
+    <property-block>        
+                <h4>Multiattack.</h4>
+                <p>The spy makes two melee attacks.</p>        
+    </property-block>
     <div id = 'mmAttacks'>
         <property-block>
-        <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+        <h4>Shortsword.</h4>
+        <p><i>Melee Weapon Attack:</i> +4 to hit, reach 5 ft., one target.
+            <i>Hit:</i> 5 (1d6 + 2) piercing damage.</p>
         </property-block>
-    </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
+        <property-block>
+        <h4>Hand Crossbow.</h4>
+        <p><i>Melee Weapon Attack:</i> +4 to hit, range 30/120 ft., one target.
+            <i>Hit:</i> 5 (1d6 + 2) piercing damage.</p>
+        </property-block>
+    </div>      
   </stat-block>

@@ -7,11 +7,11 @@
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p id='mmAC'>10</p>
+        <p id='mmAC'>13 (Chain Shirt)</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>        
-        <p id='mmHP'>aa (xdy + z)</p>        
+        <p id='mmHP'>27 (5d8 + 5)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -21,14 +21,14 @@
       <div id='mmStats'>
         <abilities-block data-str="10"
                         data-dex="10"
-                        data-con="10"
-                        data-int="10"
-                        data-wis="10"
-                        data-cha="10"></abilities-block>
+                        data-con="12"
+                        data-int="13"
+                        data-wis="16"
+                        data-cha="13"></abilities-block>
       </div>
       <property-line id='mmSkills'>
         <h4>Skills</h4>
-        <p></p>
+        <p>Medicine +7, Persuasion +3, Religion +5</p>
       </property-line>
       <property-line id='mmSaves'>                     
         <h4>Saving Throws</h4>
@@ -48,38 +48,36 @@
       </property-line>
       <property-line id='mmLanguage'>
         <h4>Languages</h4>
-        <p>Any one language (usually Common)</p>
+        <p>Any two languages</p>
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">2 (450 XP)</p>
       </property-line>
     </top-stats>
 
-    <div id = 'mmAbilities'>        
+    <div id = 'mmAbilities'>   
+        <property-block>        
+                <h4>Divine Eminence.</h4>
+                <p>As a bonus action, the priest can expend a spell slot to cause its melee weapon attacks to magically deal an extra 10 (3d6) radiant damage to a target on a hit. This benefit lasts until the end of the turn. If the priest expends a spell slot of 2nd level or higher, the extra damage increases by 1d6 for each level above 1st.</p>        
+        </property-block>      
         <property-block>        
                 <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
+                <p id='mmSpellcasting' data-level="5th" data-ability="Wisdom" data-spelllist="cleric">                
                 </p>
                 <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
-        </property-block>      
-        <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-        </property-block>      
+                <p>1st level (4 slots): <i>cure wounds</i>, <i>guiding bolt</i>, <i>sanctuary</i></p>        
+                <p>2nd level (3 slots): <i>lesser restoration</i>, <i>spiritual weapon</i></p>        
+                <p>3rd level (2 slots): <i>dispel magic</i>, <i>spirit guardians</i></p>        
+        </property-block>           
     </div>
     
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
         <property-block>
-        <h4>Club.</h4>
+        <h4>Mace.</h4>
         <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+            <i>Hit:</i> 3 (1d6) bludgeoning damage.</p>
         </property-block>
-    </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
+    </div>    
   </stat-block>

@@ -1,17 +1,17 @@
 <stat-block>
     <creature-heading>
-      <h1><span id='mmName'>Creature Name</span></h1>
+      <h1><span id='mmName'>Tribal Warrior</span></h1>
       <h2><span id='mmSize'>Medium</span> humanoid (<span id='mmRace'>any race</span>), any alignment</h2>
     </creature-heading>
 
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p id='mmAC'>10</p>
+        <p id='mmAC'>12 (Hide Armor)</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>        
-        <p id='mmHP'>aa (xdy + z)</p>        
+        <p id='mmHP'>11 (2d8 + 2)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -19,12 +19,12 @@
         </span>
       </property-line>
       <div id='mmStats'>
-        <abilities-block data-str="10"
-                        data-dex="10"
-                        data-con="10"
-                        data-int="10"
-                        data-wis="10"
-                        data-cha="10"></abilities-block>
+        <abilities-block data-str="13"
+                        data-dex="11"
+                        data-con="12"
+                        data-int="8"
+                        data-wis="11"
+                        data-cha="8"></abilities-block>
       </div>
       <property-line id='mmSkills'>
         <h4>Skills</h4>
@@ -48,38 +48,27 @@
       </property-line>
       <property-line id='mmLanguage'>
         <h4>Languages</h4>
-        <p>Any one language (usually Common)</p>
+        <p>Any one language</p>
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">1/8 (25 XP)</p>
       </property-line>
     </top-stats>
 
     <div id = 'mmAbilities'>        
         <property-block>        
-                <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
-                </p>
-                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
-        </property-block>      
-        <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
+                <h4>Pack Tactics.</h4>
+                <p>The warrior has advantage on an attack roll against a creature if at least one of the warrior's allies is within 5 feet of the creature and the ally isn't incapacitated.</p>        
         </property-block>      
     </div>
     
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
         <property-block>
-        <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+        <h4>Spear.</h4>
+        <p><i>Melee or Ranged Weapon Attack:</i> +3 to hit, reach 5 ft. or range 20/60 ft., one target.
+            <i>Hit:</i> 4 (1d6 + 1) bludgeoning damage or 5 (1d8 + 1) piercing damage if used with two hands to make a melee attack.</p>
         </property-block>
     </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
   </stat-block>

@@ -1,17 +1,17 @@
 <stat-block>
     <creature-heading>
-      <h1><span id='mmName'>Creature Name</span></h1>
+      <h1><span id='mmName'>Gladiator</span></h1>
       <h2><span id='mmSize'>Medium</span> humanoid (<span id='mmRace'>any race</span>), any alignment</h2>
     </creature-heading>
 
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p id='mmAC'>10</p>
+        <p id='mmAC'>16 (Studded Leather, Shield)</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>        
-        <p id='mmHP'>aa (xdy + z)</p>        
+        <p id='mmHP'>112 (15d8 + 45)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -19,20 +19,20 @@
         </span>
       </property-line>
       <div id='mmStats'>
-        <abilities-block data-str="10"
-                        data-dex="10"
-                        data-con="10"
+        <abilities-block data-str="18"
+                        data-dex="15"
+                        data-con="16"
                         data-int="10"
-                        data-wis="10"
-                        data-cha="10"></abilities-block>
+                        data-wis="12"
+                        data-cha="15"></abilities-block>
       </div>
       <property-line id='mmSkills'>
         <h4>Skills</h4>
-        <p></p>
+        <p>Athletics + 10, Intimidation +5</p>
       </property-line>
       <property-line id='mmSaves'>                     
         <h4>Saving Throws</h4>
-        <p></p>
+        <p>Str +7, Dex +5, Con +6</p>
       </property-line>
       <property-line id='mmVul'>
       </property-line>
@@ -52,34 +52,42 @@
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">5 (1,800 XP)</p>
       </property-line>
     </top-stats>
 
-    <div id = 'mmAbilities'>        
+    <div id = 'mmAbilities'>                     
         <property-block>        
-                <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
-                </p>
-                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
+                <h4>Brave.</h4>
+                <p>The gladiator has advantage on saving throws against being frightened.</p>        
         </property-block>      
         <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
+                <h4>Brute.</h4>
+                <p>A melee weapon deals one extra die of its damage when the gladiator hits with it (included in the attack).</p>        
         </property-block>      
     </div>
     
-    <h3>Actions</h3>
+    <h3>Actions</h3>    
     <div id = 'mmAttacks'>
+        <property-block>        
+                    <h4>Multiattack.</h4>
+                    <p>The gladiator makes three melee attacks or two ranged attacks.</p>        
+        </property-block> 
         <property-block>
         <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+        <p><i>Melee or Ranged Weapon Attack:</i> +7 to hit, reach 5 ft. and range 20/60, one target.
+            <i>Hit:</i> 11 (2d6 + 4) piercing damage or 13 (2d8 + 4) piercing damage if used with two hands to make a melee attack.</p>
         </property-block>
-    </div>
+        <property-block>
+        <h4>Shield Bash.</h4>
+        <p><i>Melee Weapon Attack:</i> +7 to hit, reach 5 ft., one target.
+            <i>Hit:</i> 9 (2d4 + 4) bludgeoning damage. If the target is a Medium or smaller creature, it must succeed on a DC 15 saving throw or be knocked prone.</p>
+        </property-block>
+    </div>    
+
+    <h3>Reactions</h3>
     <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
+                <h4>Parry.</h4>
+                <p>The gladiator adds 3 to its AC against one melee attack that would hit it. To do so, the gladiator must see the attacker and be wielding a melee weapon.</p>        
     </property-block>      
   </stat-block>

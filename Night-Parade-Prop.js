@@ -68,55 +68,57 @@ function DoTheThing(){
     
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {    
-    var template = $("#templateBlock option:selected").text();
+        var template = $("#templateBlock option:selected").text();
 
-    creatureName = $('#mmName').text(); 
-    creatureRace += $('#mmRace').text(); 
-    
-    $('#mmRace').text(race);
-    $('#mmSize').text(raceSize); 
-    
-    outputSize = $('#mmSize').text(); 
-    var cr = $('#mmCR').text().split('(')[0].trim();    
-    var bonus = $('#mmStats').html().split('=');
+        creatureName = $('#mmName').text(); 
+        creatureRace += $('#mmRace').text(); 
+        
+        $('#mmRace').text(race);
+        $('#mmSize').text(raceSize); 
+        
+        outputSize = $('#mmSize').text(); 
+        var cr = $('#mmCR').text().split('(')[0].trim();    
+        var bonus = $('#mmStats').html().split('=');
 
-    $('#mmBaseSpeed').text(raceBaseSpeed);
-    if (raceSpeed.trim().length > 0) { $('#mmExtraSpeed').text(", " + raceSpeed); }
-    
-    creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
-    creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
-    creatureStats.push(Number(bonus[3].substring(1,3).replace('"', '')) + race_modifiers[2]);
-    creatureStats.push(Number(bonus[4].substring(1,3).replace('"', '')) + race_modifiers[3]);
-    creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
-    creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
-    
-    creatureCR = cr;    
-    PassivePerception();
-    Language();
-    EnergyStuff();    
+        $('#mmBaseSpeed').text(raceBaseSpeed);
+        if (raceSpeed.trim().length > 0) { $('#mmExtraSpeed').text(", " + raceSpeed); }
+        
+        creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
+        creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
+        creatureStats.push(Number(bonus[3].substring(1,3).replace('"', '')) + race_modifiers[2]);
+        creatureStats.push(Number(bonus[4].substring(1,3).replace('"', '')) + race_modifiers[3]);
+        creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
+        creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
+        
+        creatureCR = cr;    
+        PassivePerception();
+        Language();
+        EnergyStuff();    
+        Skills();
+        AC();
 
-    // Night Parade Stuff    
-    switch (template){
-        case "Night Parade":
-            NightParade();
-            break;
-        default:
-            break;
-    }
+        // Night Parade Stuff    
+        switch (template){
+            case "Night Parade":
+                NightParade();
+                break;
+            default:
+                break;
+        }
 
-    if (raceAbility.length > 0){        
-        $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
-    }
-    
-    if (raceAttacks.length > 0){
-        $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
-    }
-    if ($('#mmSpellcasting').text().length > 0){
-        $('#mmSpellcasting').text(Spellcasting_Trait());
-    }
-    $('#mmHP').text(HitPoints());
-    $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
-  });   
+        if (raceAbility.length > 0){        
+            $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+        }
+        
+        if (raceAttacks.length > 0){
+            $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
+        }
+        if ($('#mmSpellcasting').text().length > 0){
+            $('#mmSpellcasting').text(Spellcasting_Trait());
+        }
+        $('#mmHP').text(HitPoints());
+        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
+  });     
 };
 
 function NightParade(){
@@ -136,11 +138,18 @@ function NightParade(){
     outputSize = npSize[Math.floor(Math.random() * npSize.length)];  
     if (outputSize != "Medium") { buildChanged = true; }    
     
-    MutatedAttacks();
-    Skills();
+    MutatedAttacks();    
     SavingThrows();
     $('#test').append(Features());     
     $('#mmName').text("Night Parade " + creatureName);        
+}
+
+function AC(){
+        if (raceACBonus != 0){            
+            if (Number($('#mmAC').text().split('(')[0].trim()) < Number(10 + raceACBonus + creatureStats[1].bonus())){
+                $('#mmAC').html((10 + raceACBonus + creatureStats[1].bonus()) + " (natural armor)");
+            }
+        }
 }
 
 function EnergyStuff(){
@@ -264,10 +273,12 @@ function Features(){
 }
 
 function Skills(){    
+    if (raceSkills.length == 0 && $('#mmSkills').text().trim().length == 0) return;
+
     if (raceSkills.length > 0){
         var splitSkills = raceSkills.split(',');
         splitSkills.forEach(element => {
-            if (!$('#mmSkills').text().includes(element.trim())){
+            if (!$('#mmSkills').text().includes(element.trim())){                
                 $('#mmSkills').append(", "  + element);
             }
         });        
@@ -275,10 +286,11 @@ function Skills(){
     var skills = $('#mmSkills').text().replace("Skills", "").trim().split(",");
     var finalString = "";
 
-    skills.forEach(element => {        
+    skills.forEach(element => {                
         finalString += Skill (element) + ", ";        
     });
 
+    if (finalString.trim().substr(0, 1) == ",") { finalString = finalString.replace(',', "");}
     $('#mmSkills').html("<h4>Skills</h4> " + finalString.substr(0, finalString.length - 2));
 }
 
@@ -447,6 +459,9 @@ function SkinType(){
         var addendum = " (natural armor)";
         if ($('#mmAC').text().includes('mage armor')) { 
             addendum = " (" + ((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2) + 3) + " with <i>mage armor</i>)"; 
+        }
+        if ($('#mmAC').text().includes('barkskin')) { 
+            addendum = " (can't be less than 16 with <i>barkskin</i>)"; 
         }
         $('#mmAC').html(((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2)) + addendum);
     } else {

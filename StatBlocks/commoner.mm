@@ -52,22 +52,11 @@
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">0 (10 XP)</p>
       </property-line>
     </top-stats>
 
-    <div id = 'mmAbilities'>        
-        <property-block>        
-                <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
-                </p>
-                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
-        </property-block>      
-        <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-        </property-block>      
+    <div id = 'mmAbilities'>                    
     </div>
     
     <h3>Actions</h3>
@@ -77,9 +66,5 @@
         <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
             <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
         </property-block>
-    </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
+    </div>     
   </stat-block>

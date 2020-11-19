@@ -7,11 +7,11 @@
     <top-stats>
       <property-line>
         <h4>Armor Class</h4>
-        <p id='mmAC'>10</p>
+        <p id='mmAC'>13 (Leather Armor)</p>
       </property-line>
       <property-line>
         <h4>Hit Points</h4>        
-        <p id='mmHP'>aa (xdy + z)</p>        
+        <p id='mmHP'>16 (3d8 + 3)</p>        
       </property-line>
       <property-line>
         <h4>Speed</h4>
@@ -19,16 +19,16 @@
         </span>
       </property-line>
       <div id='mmStats'>
-        <abilities-block data-str="10"
-                        data-dex="10"
-                        data-con="10"
-                        data-int="10"
-                        data-wis="10"
-                        data-cha="10"></abilities-block>
+        <abilities-block data-str="11"
+                        data-dex="14"
+                        data-con="12"
+                        data-int="11"
+                        data-wis="13"
+                        data-cha="11"></abilities-block>
       </div>
       <property-line id='mmSkills'>
         <h4>Skills</h4>
-        <p></p>
+        <p>Nature +4, Perception +5, Stealth +6, Survival +5</p>
       </property-line>
       <property-line id='mmSaves'>                     
         <h4>Saving Throws</h4>
@@ -52,34 +52,32 @@
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
-        <p id="mmCR">1/4 (50 XP)</p>
+        <p id="mmCR">1/2 (100 XP)</p>
       </property-line>
     </top-stats>
 
     <div id = 'mmAbilities'>        
         <property-block>        
-                <h4>Spellcasting.</h4>
-                <p id='mmSpellcasting' data-level="1st" data-ability="Wisdom" data-spelllist="cleric">                
-                </p>
-                <p>Cantrips (at will): <i>light</i>, <i>sacred flame</i>, <i>thaumaturgy</i></p>
-                <p>1st level (3 slots): <i>bless</i>, <i>cure wounds</i>, <i>sanctuary</i></p>        
-        </property-block>      
-        <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
+                <h4>Keen Hearing and Sight.</h4>
+                <p>The scout has advantage on Wisdom (Perception) checks that rely on hearing or sight.</p>        
         </property-block>      
     </div>
     
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
+        <property-block>        
+                    <h4>Multiattack.</h4>
+                    <p>The scout makes two melee attacks or two ranged attacks.</p>        
+        </property-block>  
         <property-block>
-        <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
+        <h4>Shortsword.</h4>
+        <p><i>Melee Weapon Attack:</i> +4 to hit, reach 5 ft., one target.
+            <i>Hit:</i> 5 (1d6 + 2) piercing damage.</p>
         </property-block>
-    </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
+        <property-block>
+        <h4>Longbow.</h4>
+        <p><i>Ranged Weapon Attack:</i> +4 to hit, range 150/600 ft., one target.
+            <i>Hit:</i> 2 (1d8 + 2) piercing damage.</p>
+        </property-block>
+    </div>        
   </stat-block>
