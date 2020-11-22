@@ -1,7 +1,7 @@
 <stat-block>
     <creature-heading>
       <h1><span id='mmName'>Bandit Captain</span></h1>
-      <h2><span id='mmSize'>Medium</span> humanoid (<span id='mmRace'>any race</span>), any non-lawful alignment</h2>
+      <h2><span id='mmSize'>Medium</span> <span id='mmType'>humanoid</span> (<span id='mmRace'>any race</span>), any non-lawful alignment</h2>
     </creature-heading>
 
     <top-stats>
