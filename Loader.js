@@ -103,7 +103,7 @@ function DoTheThing(){
                 NightParade();
                 break;
             default:
-                $('#mmName').text(race + " " + creatureName);   
+                $('#mmName').text(race.capitalize() + " " + creatureName);   
                 break;
         }
 
