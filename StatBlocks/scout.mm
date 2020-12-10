@@ -1,6 +1,6 @@
 <stat-block>
     <creature-heading>
-      <h1><span id='mmName'>Creature Name</span></h1>
+      <h1><span id='mmName'>Scout</span></h1>
       <h2><span id='mmSize'>Medium</span> <span id='mmType'>humanoid</span> (<span id='mmRace'>any race</span>), any alignment</h2>
     </creature-heading>
 

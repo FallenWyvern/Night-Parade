@@ -98,11 +98,12 @@ function DoTheThing(){
         AC();
 
         // Night Parade Stuff    
-        switch (template){
+        switch (template){            
             case "Night Parade":
                 NightParade();
                 break;
             default:
+                $('#mmName').text(race + " " + creatureName);   
                 break;
         }
 
