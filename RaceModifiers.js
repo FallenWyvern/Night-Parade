@@ -457,6 +457,30 @@ function modifyResults(){
             raceAbility = "<property-block> <h4>Mimicry. </h4><p>The kenku can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 14 Wisdom (Insight) check.</p></property-block>";
             raceAttacks = "";
             break;
+         case "kobold" :
+            race_modifiers[0] = -4;   
+            race_modifiers[1] = +2;
+            race_modifiers[2] = 0;
+            race_modifiers[3] = 0;
+            race_modifiers[4] = 0;
+            race_modifiers[5] = 0;
+            racePlural = "humans";
+            raceBaseSpeed = "30";
+            raceSpeed = "";
+            raceLanguage = "Common, Kobold";
+            raceSize = "Small";
+            raceSenses = "";
+            raceSkills = "";
+            raceACBonus = 0;
+            conditionImmune = "";
+            damageImmune = "";
+            damageResist = "";
+            damageVul = "";
+            
+            raceAbility = "<property-block> <h4>Sunlight Sensitivity. </h4><p>While in sunlight, the kobold has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight.</p></property-block>";            
+            raceAbility += "<property-block> <h4>Pack Tactics. </h4><p>The kobold has advantage on attack rolls against creatures if at least one of its allies within 5 feet of the creature and the ally isn't incapacitated.</p></property-block>";                        
+            raceAttacks = "";
+            break;
         case "kuo-toa" :
             race_modifiers[0] = 0;   
             race_modifiers[1] = 0;
