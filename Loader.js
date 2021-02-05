@@ -98,7 +98,7 @@ function DoTheThing(){
             $('#mmSpellcasting').text(Spellcasting_Trait());
         }
         $('#mmHP').text(HitPoints());
-        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
+        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; Proficency: +" + mmCRValues[creatureCR][1] + ")");          
   });     
 };
 
