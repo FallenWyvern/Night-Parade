@@ -68,9 +68,40 @@ function DoTheThing(){
     modifyResults();    
     
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
-    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {    
+    $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
+        // Night Parade Stuff    
+        switch (template){            
+            case "Night Parade":
+                MainInfoUpdate();
+                NightParade();                
+                break;
+            case "Half-dragon":
+                HalfDragon();
+                MainInfoUpdate();
+                break;
+            default:
+                MainInfoUpdate();
+                $('#mmName').text(race.capitalize() + " " + creatureName);   
+                break;
+        }
 
-        creatureName = $('#mmName').text(); 
+        if (raceAbility.length > 0){        
+            $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
+        }
+        
+        if (raceAttacks.length > 0){
+            $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
+        }
+        if ($('#mmSpellcasting').text().length > 0){
+            $('#mmSpellcasting').text(Spellcasting_Trait());
+        }
+        $('#mmHP').text(HitPoints());
+        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
+  });     
+};
+
+function MainInfoUpdate(){
+    creatureName = $('#mmName').text(); 
         creatureRace += $('#mmRace').text(); 
         
         $('#mmRace').text(race);
@@ -96,34 +127,7 @@ function DoTheThing(){
         EnergyStuff();    
         Skills();
         AC();
-
-        // Night Parade Stuff    
-        switch (template){            
-            case "Night Parade":
-                NightParade();
-                break;
-            case "Half-dragon":
-                HalfDragon();
-                break;
-            default:
-                $('#mmName').text(race.capitalize() + " " + creatureName);   
-                break;
-        }
-
-        if (raceAbility.length > 0){        
-            $('#mmAbilities').append(UpdateRacialAbilities(raceAbility.split(race).join(creatureName)));
-        }
-        
-        if (raceAttacks.length > 0){
-            $('#mmAttacks').append(UpdateRacialAbilities(raceAttacks.split(race).join(creatureName)));
-        }
-        if ($('#mmSpellcasting').text().length > 0){
-            $('#mmSpellcasting').text(Spellcasting_Trait());
-        }
-        $('#mmHP').text(HitPoints());
-        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; +" + mmCRValues[creatureCR][1] + ")");          
-  });     
-};
+}
 
 function AC(){
         if (raceACBonus != 0){            
