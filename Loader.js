@@ -102,6 +102,9 @@ function DoTheThing(){
             case "Night Parade":
                 NightParade();
                 break;
+            case "Half-dragon":
+                HalfDragon();
+                break;
             default:
                 $('#mmName').text(race.capitalize() + " " + creatureName);   
                 break;
