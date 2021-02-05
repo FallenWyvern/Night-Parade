@@ -1,0 +1,3 @@
+function HalfDragon(){
+    raceSenses += ", test";
+}
