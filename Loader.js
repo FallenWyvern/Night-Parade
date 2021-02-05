@@ -54,6 +54,7 @@ var mmCRValues = {
  };
 
 function DoTheThing(){  
+    clearRace();
     creatureName = "";
     creatureRace = "";
     creatureCR = 0;

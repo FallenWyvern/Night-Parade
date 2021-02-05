@@ -15,7 +15,28 @@ var damageResist = "";
 var damageVul = "";
 var raceACBonus = 0;
 
-var race_stats = []
+var race_stats = [];
+
+function clearRace(){
+    var race_modifiers = [0, 0, 0, 0, 0, 0];
+    var race = "";
+    var racePlural = "";
+    var raceBaseSpeed = "30";
+    var raceSpeed = "";
+    var raceLanguage = "";
+    var raceAbility = "";
+    var raceAttacks = "";
+    var raceSenses = "";
+    var raceSkills = "";
+    var raceSize = "Medium";
+    var conditionImmune = "";
+    var damageImmune = "";
+    var damageResist = "";
+    var damageVul = "";
+    var raceACBonus = 0;
+
+    var race_stats = [];
+}
 
 function modifyResults(){    
     race = $("#raceBlock option:selected").text().toLowerCase();
