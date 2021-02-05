@@ -82,7 +82,8 @@ function modifyResults(){
             race_modifiers[3] = 0;
             race_modifiers[4] = 0;
             race_modifiers[5] = 1;
-            racePlural = "dragonborn";
+            racePlural = ancestry[ancestryIndex] + " dragonborn";
+            race = racePlural;
             raceBaseSpeed = "30";
             raceSpeed = "";
             raceLanguage = "Common, Draconic";

@@ -78,6 +78,7 @@ function DoTheThing(){
             case "Half-dragon":
                 HalfDragon();
                 MainInfoUpdate();
+                HalfDragonCRUpdate();
                 break;
             default:
                 MainInfoUpdate();
@@ -102,31 +103,31 @@ function DoTheThing(){
 
 function MainInfoUpdate(){
     creatureName = $('#mmName').text(); 
-        creatureRace += $('#mmRace').text(); 
-        
-        $('#mmRace').text(race);
-        $('#mmSize').text(raceSize); 
-        
-        outputSize = $('#mmSize').text(); 
-        var cr = $('#mmCR').text().split('(')[0].trim();    
-        var bonus = $('#mmStats').html().split('=');
+    creatureRace += $('#mmRace').text(); 
+    
+    $('#mmRace').text(race);
+    $('#mmSize').text(raceSize); 
+    
+    outputSize = $('#mmSize').text(); 
+    var cr = $('#mmCR').text().split('(')[0].trim();    
+    var bonus = $('#mmStats').html().split('=');
 
-        $('#mmBaseSpeed').text(raceBaseSpeed);
-        if (raceSpeed.trim().length > 0) { $('#mmExtraSpeed').text(", " + raceSpeed); }
-        
-        creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
-        creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
-        creatureStats.push(Number(bonus[3].substring(1,3).replace('"', '')) + race_modifiers[2]);
-        creatureStats.push(Number(bonus[4].substring(1,3).replace('"', '')) + race_modifiers[3]);
-        creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
-        creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
-        
-        creatureCR = cr;    
-        PassivePerception();
-        Language();
-        EnergyStuff();    
-        Skills();
-        AC();
+    $('#mmBaseSpeed').text(raceBaseSpeed);
+    if (raceSpeed.trim().length > 0) { $('#mmExtraSpeed').text(", " + raceSpeed); }
+    
+    creatureStats.push(Number(bonus[1].substring(1,3).replace('"', '')) + race_modifiers[0]);
+    creatureStats.push(Number(bonus[2].substring(1,3).replace('"', '')) + race_modifiers[1]);
+    creatureStats.push(Number(bonus[3].substring(1,3).replace('"', '')) + race_modifiers[2]);
+    creatureStats.push(Number(bonus[4].substring(1,3).replace('"', '')) + race_modifiers[3]);
+    creatureStats.push(Number(bonus[5].substring(1,3).replace('"', '')) + race_modifiers[4]);
+    creatureStats.push(Number(bonus[6].substring(1,3).replace('"', '')) + race_modifiers[5]);
+    
+    creatureCR = cr;    
+    PassivePerception();
+    Language();
+    EnergyStuff();    
+    Skills();
+    AC();
 }
 
 function AC(){
