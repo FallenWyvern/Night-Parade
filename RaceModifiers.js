@@ -117,7 +117,7 @@ function modifyResults(){
             damageResist = "";
             damageVul = "";
 
-            raceAbility += "<property-block> <h4>Damage Resistance. </h4><p>The dragonborn has resistance to " + damage[ancestryIndex] + " damage.</p></property-block>";
+            raceAbility = "<property-block> <h4>Damage Resistance. </h4><p>The dragonborn has resistance to " + damage[ancestryIndex] + " damage.</p></property-block>";
             
             switch (ancestry[ancestryIndex]){
                 case "black":
