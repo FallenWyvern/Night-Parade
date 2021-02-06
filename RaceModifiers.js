@@ -211,7 +211,7 @@ function modifyResults(){
             damageResist = "";
             damageVul = "";
             
-            raceAbility += "<property-block><h4>Fey Ancestry. </h4><p>The drow has advantage on saving throws against being charmed, and magic can’t put it to sleep.</p></property-block>";            
+            raceAbility = "<property-block><h4>Fey Ancestry. </h4><p>The elf has advantage on saving throws against being charmed, and magic can’t put it to sleep.</p></property-block>";            
             raceAttacks = "";
             break;
         case "gnoll" :
@@ -332,8 +332,8 @@ function modifyResults(){
             damageVul = "";
             
             raceAbility = "<property-block> <h4>Blind Senses. </h4><p>The grimlock can't use its blindsight while deafened and unable to smell.</p></property-block>";            
-            raceAbility = "<property-block> <h4>Keen Hearing and Smell. </h4><p>The grimlock has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p></property-block>";
-            raceAbility = "<property-block> <h4>Stone Camouflage. </h4><p>The grimlock has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.</p></property-block>";      
+            raceAbility += "<property-block> <h4>Keen Hearing and Smell. </h4><p>The grimlock has advantage on Wisdom (Perception) checks that rely on hearing or smell.</p></property-block>";
+            raceAbility += "<property-block> <h4>Stone Camouflage. </h4><p>The grimlock has advantage on Dexterity (Stealth) checks made to hide in rocky terrain.</p></property-block>";      
             raceAttacks = "";
             break;
         case "half-elf" :
@@ -454,7 +454,7 @@ function modifyResults(){
             damageVul = "";
             
             raceAbility = "<property-block> <h4>Ambusher. </h4><p>In the first round of a combat, the kenku has advantage on attack rolls against any creature it surprised..</p></property-block>";
-            raceAbility = "<property-block> <h4>Mimicry. </h4><p>The kenku can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 14 Wisdom (Insight) check.</p></property-block>";
+            raceAbility += "<property-block> <h4>Mimicry. </h4><p>The kenku can mimic any sounds it has heard, including voices. A creature that hears the sounds can tell they are imitations with a successful DC 14 Wisdom (Insight) check.</p></property-block>";
             raceAttacks = "";
             break;
          case "kobold" :
