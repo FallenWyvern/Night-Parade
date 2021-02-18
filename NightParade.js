@@ -515,3 +515,245 @@ function bigFeatures(randomFeature){
     }
     return returnString;
 }
+
+
+function SkinType(){
+    var returnString = "";
+
+    var temp = npSkinThickness[Math.floor(Math.random() * npSkinThickness.length)];
+    console.log("TYPE: " + temp);
+
+    if (temp != "normal"){
+        returnString += "They have an unusual hide that feels " + temp + ". " + SkinPattern();
+        
+        var addendum = " (natural armor)";
+        if ($('#mmAC').text().includes('mage armor')) { 
+            addendum = " (" + ((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2) + 3) + " with <i>mage armor</i>)"; 
+        }
+        if ($('#mmAC').text().includes('barkskin')) { 
+            addendum = " (can't be less than 16 with <i>barkskin</i>)"; 
+        }
+        $('#mmAC').html(((10 + raceACBonus) + (npSkinThickness.indexOf(temp) * 2)) + addendum);
+    } else {
+        if (raceACBonus != 0){
+            $('#mmAC').html((10 + raceACBonus + creatureStats[1].bonus()) + " (natural armor)");
+        }
+    }
+
+    return returnString; 
+}
+
+function SkinPattern(){
+    var RandomNumber = Math.floor(Math.random() * 10);
+    var returnString = "";
+    console.log("Skin Pattern: " + RandomNumber);
+
+    switch (RandomNumber){
+        case 0:
+            returnString = "Their skin is a pattern of alternating " + SkinColor() + " and " + SkinColor() + " stripes. ";
+            break;
+        case 1:
+            returnString = "Their back is " + SkinColor() +  " which fades to " + SkinColor() +  " on their belly and palms. ";
+            break;
+        case 2:
+            returnString =  "Their skin is a solid " + SkinColor() + ". ";
+            break;
+        case 3:
+            returnString = "Their head and limbs are "  + SkinColor() + " while their body is " + SkinColor() + ". ";
+            break;
+        case 4:
+            returnString = "During the day, their skin is " + SkinColor() + " which becomes " + SkinColor() + " under the night sky. ";
+            break;
+        case 5:
+            returnString = "Their body is translucent, only showing an opaque " + SkinColor() + " at the ends of their limbs.  ";
+            break;
+        case 6:
+            returnString = "Their body is randomly colored in splotches."
+            break;
+        case 7:
+            returnString = "Their body is a delicate mixture of " + SkinColor() + " and " + SkinColor() + ", creating a gentle marble effect. ";
+            break;
+        case 8:
+            returnString = SkinColor() + ", " +  SkinColor() + ", and " + SkinColor() + " bands swirl and alternate across their skin. ";
+            break;
+        case 9:
+            returnString = "Their " + SkinColor() + " skin is marked with " + SkinColor() + " lines that gently glow in the dark. ";
+            break;
+    }
+
+    return returnString.capitalize();
+}
+
+function SkinColor(){
+    var tone = [ "light", "", "", "", "", "dark"]
+    return (tone[Math.floor(Math.random() * tone.length)] + " " + npSkinColors[Math.floor(Math.random() * npSkinColors.length)]).trim();
+}
+
+function Abilities(){
+    var returnString = "";
+    
+    if (buildChanged){
+        console.log(outputSize + " " + raceSize);
+        if (outputSize == "Small"){
+            switch (raceSize){
+                case "Small":
+                    $('#mmSize').text("Small");
+                    break;
+                case "Large":
+                    $('#mmSize').text("Medium");
+                    break;
+                default:
+                    $('#mmSize').text("Small");
+                    break;
+            }
+            
+            $('#mmAbilities').append("<property-block> <h4>Small Build.</h4> <p>The " + creatureName + 
+            " is smaller than others of it's kind. It has disadvantage on Strength ability checks and saving throws.</p> </property-block>");
+
+            returnString += ", and are smaller than most " + racePlural;
+        };
+
+        if (outputSize == "Large"){
+            switch (raceSize){
+                case "Small":
+                    $('#mmSize').text("Medium");
+                    break;
+                case "Large":
+                    $('#mmSize').text("Large");
+                    break;
+                default:
+                    $('#mmSize').text("Large");
+                    break;
+            }
+            
+            $('#mmAbilities').append("<property-block>  <h4>Large Build.</h4> <p>The " + creatureName + 
+            " is larger than others of it's kind. It has advantage on Strength ability checks and saving throws.</p> </property-block>");
+            returnString += ", and are larger than most other " + racePlural;
+        }; 
+    }
+    return returnString;
+}
+
+function Locomotion(){    
+    var returnString = "walking";
+    var walking = true;
+    var flying = false;
+    var swimming = false;
+    var oozing = false;
+    var amorphous = false;    
+    var spiderclimb = false;
+    var climb = false;
+    var amphibious = false;
+
+    var list = LocomotionList(); 
+    list.forEach((element) => {                 
+        console.log(element + " ");
+    });
+
+    list.forEach((element) => {                 
+        if (element == "walking") { creatureBaseSpeed += 10; }
+    });
+    $('#mmBaseSpeed').text(creatureBaseSpeed);
+
+    var fly = "";
+    if (!raceSpeed.includes("fly")){
+        list.forEach((element) => {              
+            if (element == "flying") {             
+                if (flying){
+                    fly = ", fly " + creatureBaseSpeed + " ft. (hover)";
+                } else {
+                    flying = true;      
+                    fly = ", fly " + creatureBaseSpeed + " ft.";
+                }                                         
+            }
+        });
+    $('#mmSpeed').append(fly);
+    } 
+
+    var swim = ""
+    if (!raceSpeed.includes("swim")){
+    list.forEach((element) => {                 
+        if (element == "swimming") {             
+            if (swimming){
+                if (!amphibious){
+                    if (!$('#mmAbilities').text().includes("Amphibious")){
+                        $('#mmAbilities').append("<property-block> <h4>Amphibious.</h4> <p>The " + creatureName + 
+                        " can breathe air and water.</p> </property-block>");
+                    }  
+                    amphibious = true;
+                }
+            } else {
+                swimming = true;   
+                swim = ", swimming " + creatureBaseSpeed + " ft.";
+            }                                
+        }
+    });
+    $('#mmSpeed').append(swim);
+    }
+    
+    var ooze = "";
+    list.forEach((element) => {                  
+        if (element == "oozing") {             
+            if (oozing){
+                if (!amorphous){
+                    $('#mmAbilities').append("<property-block> <h4>Amorphous.</h4> <p>The " + creatureName + 
+                    " can move through a space as narrow as 1 inch wide without squeezing.</p> </property-block>");  
+                    amorphous = true;
+                }
+            } else {
+                oozing = true; 
+                ooze = ", climb " + creatureBaseSpeed + " ft.";
+                if (!spiderclimb){
+                    $('#mmAbilities').append("<property-block> <h4>Spider Climb.</h4> <p>The " + creatureName + 
+                    " can climb difficult surfaces, including upside down on ceilings, without needing to make an ability check.</p> </property-block>");  
+                    spiderclimb = true;
+                }
+            }                                  
+        }
+    });
+    $('#mmSpeed').append(ooze);
+
+    if (flying) { returnString += " and flying"; }
+    if (oozing) { returnString += " and oozing"; }
+    if (swimming) { returnString += " and swimming"; }
+    if (climb) {returnString += " and climbing"; }
+    return returnString;
+}
+
+function LocomotionList(){    
+    var listofspeeds = [];
+    var temp = "";
+    temp = npLocomotion[Math.floor(Math.random() * npLocomotion.length)];    
+    
+    if (temp == "multiple"){
+        var move1 = LocomotionList();
+        var move2 = LocomotionList();
+        listofspeeds.push(move1);
+        listofspeeds.push(move2);
+    } else {
+        listofspeeds.push(temp);
+    }
+
+    return listofspeeds;
+}
+
+function FeaturesCause(){
+    var causes = [
+        "Due to their time in the dream realms, ",
+        "After having wandered for too long in the alleyways of Nod, ",
+        "Ravaged by miscast magics, ",
+        "Twisted by the black ichor blood of a maelephant, ",
+        "Cursed by " + NightmareCourt() + " of the nightmare court, "
+    ];
+
+    return causes[Math.floor(Math.random() * causes.length)];
+}
+
+function NightmareCourt(){
+    var courtMembers = [
+        "The Nightmare Man", "Hypnos", "Mullonga", "The Ghost Dancer", "Morpheus", "The Rainbow Serpent"
+    ];
+
+    return courtMembers[Math.floor(Math.random() * courtMembers.length)];
+}
+
