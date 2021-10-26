@@ -1,5 +1,6 @@
 var race_modifiers = [0, 0, 0, 0, 0, 0];
 var race = "";
+var raceType = "Humanoid";
 var raceTypicalAlignment = "";
 var racePlural = "";
 var raceBaseSpeed = "30";
@@ -414,6 +415,7 @@ function modifyResults(){
             break;
             case "harpy" :
                 unusualRace = 1;
+                raceType = "Monstrosity"
                 raceTypicalAlignment = "chaotic evil";
                 race_modifiers[0] = 2;   
                 race_modifiers[1] = 3;            

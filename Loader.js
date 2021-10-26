@@ -71,11 +71,7 @@ function DoTheThing(){
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
         if (unusualRace == 1) {
-            if ($("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() == "no_class"){
-                // $('#mmName').html(race.capitalize());
-            } else {
-                $('#mmType').html(race.capitalize());
-            }
+            $('#mmType').html(raceType.capitalize());            
         } 
 
         // Night Parade Stuff    
@@ -112,8 +108,7 @@ function DoTheThing(){
 
 function MainInfoUpdate(){
     creatureName = $('#mmName').text();     
-    creatureRace += $('#mmRace').text();
-    if (creatureName.trim() === '') creatureName = $('#mmRace').text();
+    creatureRace += $('#mmRace').text();    
     
     $('#mmRace').text(race);
     $('#mmSize').text(raceSize); 
