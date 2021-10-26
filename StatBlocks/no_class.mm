@@ -1,7 +1,7 @@
 <stat-block>
     <creature-heading>
-      <h1><span id='mmName'>Creature Name</span></h1>
-      <h2><span id='mmSize'>Medium</span> <span id='mmType'></span> <span id='mmRace'></span>, any alignment</h2>
+      <h1><span id='mmName'></span></h1>
+      <h2><span id='mmSize'></span> <span id='mmType'></span> <span id='mmRace'></span>, any alignment</h2>
     </creature-heading>
 
     <top-stats>
