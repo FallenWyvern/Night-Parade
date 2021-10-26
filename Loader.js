@@ -73,7 +73,7 @@ function DoTheThing(){
         if (unusualRace == 1) {            
             $('#mmType').html(raceType.capitalize());      
             $('#mmName').html(raceType.capitalize());                  
-            creatureName = $('#mmRace').text();                        
+            //creatureName = $('#mmRace').text();                        
         } 
 
         // Night Parade Stuff    
