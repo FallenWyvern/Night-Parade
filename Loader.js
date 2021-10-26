@@ -70,9 +70,10 @@ function DoTheThing(){
     
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
-        if (unusualRace == 1) {
-            $('#mmType').html(raceType.capitalize());            
-            creatureName = $('#mmRace').text();            
+        if (unusualRace == 1) {            
+            $('#mmType').html(raceType.capitalize());      
+            $('#mmName').html(raceType.capitalize());                  
+            creatureName = $('#mmRace').text();                        
         } 
 
         // Night Parade Stuff    
