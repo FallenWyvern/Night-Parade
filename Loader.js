@@ -71,7 +71,7 @@ function DoTheThing(){
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
         if (unusualRace == 1) {
-            $('#mmRace').text() = race;
+            $('#mmName').html(race.capitalize());
         } 
 
         // Night Parade Stuff    
