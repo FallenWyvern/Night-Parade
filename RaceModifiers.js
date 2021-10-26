@@ -410,6 +410,33 @@ function modifyResults(){
             raceAbility += "<property-block> <h4>Halfling Nimbleness. </h4><p>The halfling can move through the space of any creature that is of a size larger than it.</p></property-block>";
             raceAttacks = "";
             break;
+            case "harpy" :
+                race_modifiers[0] = 2;   
+                race_modifiers[1] = 3;            
+                race_modifiers[2] = 2;
+                race_modifiers[3] = -3;
+                race_modifiers[4] = 0;            
+                race_modifiers[5] = 3;                
+                racePlural = "harpies";
+                raceBaseSpeed = "20";
+                raceSpeed = "fly 50 ft."                
+                raceLanguage = "Common";
+                raceSize = "Medium";
+                raceSenses = "";
+                raceSkills = "";
+                raceACBonus = 0;
+                conditionImmune = "";
+                damageImmune = "";
+                damageResist = "";
+                damageVul = "";
+                
+                raceAbility = "";            
+                raceAttacks += "<property-block> <h4>Multiattack.</h4><p>The harpy makes two attacks: one with its claws and one with its club.</p></property-block>";
+                raceAttacks += "<property-block><h4>Claws.</h4><p><i>Melee Weapon Attack:</i> +3 to hit, reach 5 ft., one target.<i>Hit:</i> 6 (2d4 + 1) slashing damage.</p></property-block>";
+                raceAttacks += "<property-block><h4>Club.</h4><p><i>Melee or Ranged Weapon Attack:</i> +3 to hit, reach 5 ft. or range 20/60 ft.,, one target.<i>Hit:</i> 3 (1d4 + 1) bludgeoning damage.</p></property-block>";
+                raceAttacks += "<property-block> <h4>Luring Song.</h4><p>The harpy sings a magical melody. Every humanoid and giant within 300 feet of the harpy that can hear the song must succeed on a DC 11 Wisdom saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated. While charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, the target can repeat the saving throw. A charmed target can also repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it. A target that successfully saves is immune to this harpy's song for the next 24 hours..</p></property-block>";
+    
+                break;    
         case "hobgoblin" :
             race_modifiers[0] = 0;   
             race_modifiers[1] = 0;
