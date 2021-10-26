@@ -103,8 +103,9 @@ function DoTheThing(){
 };
 
 function MainInfoUpdate(){
-    creatureName = $('#mmName').text(); 
-    creatureRace += $('#mmRace').text(); 
+    creatureName = $('#mmName').text();     
+    creatureRace += $('#mmRace').text();
+    if (creatureName.length <= 0) creatureName = creatureRace;
     
     $('#mmRace').text(race);
     $('#mmSize').text(raceSize); 
