@@ -1,5 +1,6 @@
 var race_modifiers = [0, 0, 0, 0, 0, 0];
 var race = "";
+var raceTypicalAlignment = "";
 var racePlural = "";
 var raceBaseSpeed = "30";
 var raceSpeed = "";
@@ -411,6 +412,7 @@ function modifyResults(){
             raceAttacks = "";
             break;
             case "harpy" :
+                raceTypicalAlignment = "chaotic evil";
                 race_modifiers[0] = 2;   
                 race_modifiers[1] = 3;            
                 race_modifiers[2] = 2;
