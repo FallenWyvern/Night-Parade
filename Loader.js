@@ -72,9 +72,7 @@ function DoTheThing(){
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
         if (unusualRace == 1) {
             $('#mmType').html(raceType.capitalize());            
-            if ($("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() == "no_class"){
-                creatureName = $('#mmRace').text();
-            }
+            creatureName = $('#mmRace').text();            
         } 
 
         // Night Parade Stuff    
