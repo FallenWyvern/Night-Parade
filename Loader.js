@@ -107,7 +107,9 @@ function DoTheThing(){
 };
 
 function MainInfoUpdate(){
-    creatureName = $('#mmName').text();     
+    creatureName = $('#mmName').text();   
+    if (unusualRace == 1) creatureName =   $('#mmRace').text();
+    
     creatureRace += $('#mmRace').text();    
     
     $('#mmRace').text(race);
