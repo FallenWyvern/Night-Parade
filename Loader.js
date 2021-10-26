@@ -70,6 +70,10 @@ function DoTheThing(){
     
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
+        if (unusualRace == 1) {
+            $('#mmRace').text() = race;
+        } 
+
         // Night Parade Stuff    
         switch (template){            
             case "Night Parade":
@@ -98,7 +102,7 @@ function DoTheThing(){
             $('#mmSpellcasting').text(Spellcasting_Trait());
         }
         $('#mmHP').text(HitPoints());
-        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; Proficency: +" + mmCRValues[creatureCR][1] + ")");          
+        $('#mmCR').text(mmCRValues[creatureCR][0] + " (" + mmCRValues[creatureCR][4] + " XP; Proficency: +" + mmCRValues[creatureCR][1] + ")");                     
   });     
 };
 
