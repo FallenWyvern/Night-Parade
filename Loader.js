@@ -71,7 +71,11 @@ function DoTheThing(){
     console.log("Loading: " + "StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm");
     $("#DivContent").load("StatBlocks/" + $("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() + ".mm", function() {            
         if (unusualRace == 1) {
-            $('#mmName').html(race.capitalize());
+            if ($("#npcBlock option:selected").text().replace(" ", "_").toLowerCase() == "no_class"){
+                // $('#mmName').html(race.capitalize());
+            } else {
+                $('#mmType').html(race.capitalize());
+            }
         } 
 
         // Night Parade Stuff    
