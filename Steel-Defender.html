@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Steel Defender</title> 
+    
+    <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="icon"
+        type="image/png"
+        href="logo.png" />
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="jquery-ui-1.12.1\jquery-ui.js"></script>    
+      
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic'
+        rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Libre+Baskerville:700'
+        rel='stylesheet' type='text/css'>
+    
+    <script type="module" src="./src/js/stat-block.js"></script>
+    <script type="module" src="./src/js/creature-heading.js"></script>
+    <script type="module" src="./src/js/top-stats.js"></script>
+    <script type="module" src="./src/js/abilities-block.js"></script>
+    <script type="module" src="./src/js/property-line.js"></script>
+    <script type="module" src="./src/js/property-block.js"></script>
+
+    <script>
+    $( function() {
+        var levelSpinner = $( "#spinner" ).spinner();
+        var intSpinner = $( "#spinner2" ).spinner();
+        $( "button" ).button();
+    } );
+    $(document).ready(function(){  
+            
+        });
+    </script>
+    <style>      
+      body {
+        margin: 0;
+      }
+
+      stat-block {
+        /* A bit of margin for presentation purposes, to show off the drop
+        shadow. */
+        margin-left: 20px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <p>
+        <label for="spinner">Artificer Level:</label>
+        <input id="spinner" name="value">
+    </p>
+    <p>
+        <label for="spinner2">Intelligence Modifier:</label>
+        <input id="spinner2" name="value">
+    </p>
+    <p>
+        <button id="button">Create</button>
+    </p>
+    <div id="DivContent"></div>
+    <div id="test" style="margin-left: 25px; margin-top: 25px; width: 704px;"></div>
+  </body>
+</html>
