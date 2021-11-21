@@ -45,21 +45,12 @@ function DoTheThing(){
 }
 
 function HitPoints(){
-    var targetHP = mmCRValues[creatureCR][5];
+    var targetHP = 2 + $('#spinner2').text() + (5 * $('#spinner').text());
     var currentHP = 0;
     var lastValue = 1000;
     var currentMultiplier = 0;
     var dieSize = 8;
-    var conMod = creatureStats[2].bonus()
-
-    if (outputSize == "Large") {dieSize = 10;}
-    if (outputSize == "Small") {dieSize = 6;}
-    
-    while (currentHP < targetHP){
-        currentMultiplier++;        
-        currentHP = (currentMultiplier * ((dieSize / 2) + 0.5)) + (currentMultiplier * conMod);        
-        //console.log("TARGET: " + targetHP + " | " + currentHP + " " + currentMultiplier + " " + dieSize + " (" + ((dieSize / 2) + 0.5) + ") " + conMod);
-    }
+    var conMod = 2;
 
     returnstring = parseInt(currentHP);
     returnstring = returnstring + " (" + currentMultiplier + "d" + dieSize;
