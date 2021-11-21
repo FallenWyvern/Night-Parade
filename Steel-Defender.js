@@ -51,6 +51,11 @@ function DoTheThing(){
     $("#DivContent").load("StatBlocks/steel_defender.mm", function(){
         $('#mmHP').text(HitPoints());
         $('#mmCR').text("--; Proficiency: +" + profMod);
+        $('#mmSenses').text("darkvision 60 ft., passive Perception +" + (profMod * 2));
+        $('#mmSkills').text("Athletics +" + (2 + profMod) + ", Perception +" + (2 * profMod));
+        $('#mmSaves').text("Dex +" + (1 + profMod) + ", Con +" + (2 + profMod));
+        $('#mmAttacks').append("<b><i>Force-Empowered Rend.</i></b>");
+        $('#mmAttacks').append("<b><i>Repair (3/Day).</i></b>");
     });
 }
 

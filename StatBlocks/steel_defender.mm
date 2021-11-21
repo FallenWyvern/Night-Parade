@@ -48,7 +48,7 @@
       </property-line>
       <property-line id='mmSenses'>
         <h4>Senses</h4>
-        <p>darkvision 60 ft.</p>
+        <p></p>
       </property-line>
       <property-line id='mmLanguage'>
         <h4>Languages</h4>
