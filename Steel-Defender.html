@@ -35,10 +35,10 @@
         $("#" + spinnerid).spinner({ min: minval, max: maxval }).val(initvalue);
     }
 
-    $( "button" ).click( function( event ) {
+    $( "button, input, a" ).click( function( event ) {
         $("#DivContent").empty();
         DoTheThing(); 
-    });
+    } );
 
     $(document).ready(function(){  
         setSpinner("spinner", 1, 20, 1);
