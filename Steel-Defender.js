@@ -52,8 +52,8 @@ function DoTheThing(){
         $('#mmHP').text(HitPoints());
         $('#mmCR').text("--; Proficiency: +" + profMod);
         $('#mmSenses').text("darkvision 60 ft., passive Perception +" + (profMod * 2));
-        $('#mmSkills').text("Athletics +" + (2 + profMod) + ", Perception +" + (2 * profMod));
-        $('#mmSaves').text("Dex +" + (1 + profMod) + ", Con +" + (2 + profMod));
+        $('#mmSkills').append("Athletics +" + (2 + profMod) + ", Perception +" + (2 * profMod));
+        $('#mmSaves').append("Dex +" + (1 + profMod) + ", Con +" + (2 + profMod));
         $('#mmAttacks').append("<property-block> <h4>Force-Empowered Rend.</h4><p></p></property-block>");        
         $('#mmAttacks').append("<property-block> <h4>Repair (3/Day).</h4><p></p></property-block>");
     });
