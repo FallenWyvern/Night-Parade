@@ -69,18 +69,11 @@
     
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
-        <property-block>
-        <h4>Club.</h4>
-        <p><i>Melee Weapon Attack:</i> +2 to hit, reach 5 ft., one target.
-            <i>Hit:</i> 2 (1d4) bludgeoning damage.</p>
-        </property-block>
-    </div>
-    <property-block>        
-                <h4>Title.</h4>
-                <p>Details</p>        
-    </property-block>      
-    <h3>Actions</h3>
-    
+      <property-block>        
+      </property-block>
+    </div>      
+
+    <h3>Reactions</h3>    
     <div id = 'mmReactions'>
       <property-block>        
                   <h4>Deflect Attack.</h4>
