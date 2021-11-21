@@ -25,24 +25,23 @@
     <script type="text/javascript" src="Steel-Defender.js"></script>
 
     <script>
-    $( function() {
-        var levelSpinner = $( "#spinner" ).spinner();
-        var intSpinner = $( "#spinner2" ).spinner();
-        var createButton = $("button").button();
-    } );
+        $( function() {
+            var levelSpinner = $( "#spinner" ).spinner();
+            var intSpinner = $( "#spinner2" ).spinner();
+            var createButton = $("button").button();
+            $( "button, input, a" ).click( function( event ) {
+                $("#DivContent").empty();
+                DoTheThing(); 
+            } );
+        } );
     
-    function setSpinner(spinnerid, minval, maxval, initvalue) {
-        $("#" + spinnerid).spinner({ min: minval, max: maxval }).val(initvalue);
-    }
+        function setSpinner(spinnerid, minval, maxval, initvalue) {
+            $("#" + spinnerid).spinner({ min: minval, max: maxval }).val(initvalue);
+        }
 
-    $( "button, input, a" ).click( function( event ) {
-        $("#DivContent").empty();
-        DoTheThing(); 
-    } );
-
-    $(document).ready(function(){  
-        setSpinner("spinner", 1, 20, 1);
-        setSpinner("spinner2", 0, 10, 0);        
+        $(document).ready(function(){  
+            setSpinner("spinner", 1, 20, 1);
+            setSpinner("spinner2", 0, 10, 0);        
         });
     </script>
     <style>      
