@@ -46,12 +46,17 @@ function DoTheThing(){
 }
 
 function HitPoints(){
-    var targetHP = 2 + $('#spinner2').text() + (5 * $('#spinner').text());
+    var targetHP = 2 + ($('#spinner2').text()) + (5 * $('#spinner').text());
     var currentHP = 0;
     var lastValue = 1000;
     var currentMultiplier = 0;
     var dieSize = 8;
     var conMod = 2;
+
+    while (currentHP < targetHP){
+        currentMultiplier++;        
+        currentHP = (currentMultiplier * ((dieSize / 2) + 0.5)) + (currentMultiplier * conMod);        
+    }
 
     returnstring = parseInt(currentHP);
     returnstring = returnstring + " (" + currentMultiplier + "d" + dieSize;

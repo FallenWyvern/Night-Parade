@@ -52,7 +52,7 @@
       </property-line>
       <property-line id='mmLanguage'>
         <h4>Languages</h4>
-        <p>The Languages You Speak</p>
+        <p>The languages you speak</p>
       </property-line>
       <property-line>
         <h4>Challenge</h4>        
