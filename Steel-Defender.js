@@ -1,3 +1,7 @@
+var profMod = 2;
+var intMod = 0;
+var level =  1;
+
 var mmCRValues = {
     "0": ["0", "2", "13", "3", "10", 3],
     "1/8":["1/8", "2", "13", "3", "25", 9],
@@ -39,21 +43,23 @@ var mmCRValues = {
  var creatureCR = 0;
  var race_modifiers = [0, 0, 0, 0, 0, 0];
 
-function DoTheThing(){ 
+function DoTheThing(){
+    intMod = parseInt($('#spinner2').spinner("value"));
+    level =  parseInt($('#spinner').spinner("value")); 
+    profMod = 2 + (parseInt(level / 4));
+    
     $("#DivContent").load("StatBlocks/steel_defender.mm", function(){
         $('#mmHP').text(HitPoints());
+        $('#mmCR').text("--; Proficiency: +" + profMod);
     });
 }
 
 function HitPoints(){
-    var intMod = parseInt($('#spinner2').spinner("value"));
-    var level =  parseInt($('#spinner').spinner("value"));
-    console.log(intMod + " " + level);
     var targetHP = 2 + intMod + (5 * level);
     
     returnstring = targetHP;
-    returnstring = returnstring + " (" + $('#spinner').text() + "d8";
-    returnstring = returnstring +  " + "  + (2 * $('#spinner').text());    
+    returnstring = returnstring + " (" + level + "d8";
+    returnstring = returnstring +  " + "  + (2 * level);    
     returnstring = returnstring + ")";
     return returnstring;
 }
