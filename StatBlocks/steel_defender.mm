@@ -69,8 +69,6 @@
     
     <h3>Actions</h3>
     <div id = 'mmAttacks'>
-      <property-block>        
-      </property-block>
     </div>      
 
     <h3>Reactions</h3>    

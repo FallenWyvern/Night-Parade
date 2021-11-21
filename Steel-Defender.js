@@ -54,8 +54,8 @@ function DoTheThing(){
         $('#mmSenses').text("darkvision 60 ft., passive Perception +" + (profMod * 2));
         $('#mmSkills').text("Athletics +" + (2 + profMod) + ", Perception +" + (2 * profMod));
         $('#mmSaves').text("Dex +" + (1 + profMod) + ", Con +" + (2 + profMod));
-        $('#mmAttacks').append("<b><i>Force-Empowered Rend.</i></b>");
-        $('#mmAttacks').append("<b><i>Repair (3/Day).</i></b>");
+        $('#mmAttacks').append("<property-block> <h4>Force-Empowered Rend.</h4><p></p></property-block>");        
+        $('#mmAttacks').append("<property-block> <h4>Repair (3/Day).</h4><p></p></property-block>");
     });
 }
 
