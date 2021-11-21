@@ -46,9 +46,9 @@ function DoTheThing(){
 }
 
 function HitPoints(){
-    var targetHP = parseInt(2 + ($('#spinner2').text()) + (5 * $('#spinner').text()));
+    var targetHP = 2 + parseInt($('#spinner2').text()) + (5 * parseInt($('#spinner').text()));
     
-    returnstring = parseInt(targetHP);
+    returnstring = targetHP;
     returnstring = returnstring + " (" + $('#spinner').text() + "d8";
     returnstring = returnstring +  " + "  + (2 * $('#spinner').text());    
     returnstring = returnstring + ")";
