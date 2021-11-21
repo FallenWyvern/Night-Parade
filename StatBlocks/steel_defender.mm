@@ -26,13 +26,13 @@
                         data-wis="10"
                         data-cha="6"></abilities-block>
       </div>
-      <property-line id='mmSkills'>
+      <property-line>
         <h4>Skills</h4>
-        <p></p>
+        <p id='mmSkills'></p>
       </property-line>
-      <property-line id='mmSaves'>                     
+      <property-line>                     
         <h4>Saving Throws</h4>
-        <p></p>
+        <p id='mmSaves'></p>
       </property-line>
       <property-line id='mmVul'>
       </property-line>
