@@ -44,9 +44,6 @@
             setSpinner("spinner2", 0, 10, 0);        
         });
     </script>
-    <style type="text/css">  
-      #spinner, #spinner2 input {width: 20px}  
-    </style>  
     <style>      
       body {
         margin: 0;
@@ -58,15 +55,23 @@
         margin-left: 20px;
         margin-top: 20px;
       }
+
+      spinner {
+        width: 20px;
+      }
+
+      spinner2 {
+        width: 20px;
+      }
     </style>
   </head>
   <body>
     <p>
         <label for="spinner">Artificer Level:</label>
-        <input id="spinner" name="value" css="width:20px">
+        <input id="spinner" name="value">
 
         <label for="spinner2">Intelligence Modifier:</label>
-        <input id="spinner2" name="value" css="width:20px">
+        <input id="spinner2" name="value">
 
         <button id="button">Create</button>
     </p>
