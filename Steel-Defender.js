@@ -46,7 +46,10 @@ function DoTheThing(){
 }
 
 function HitPoints(){
-    var targetHP = 2 + parseInt($('#spinner2').text()) + (5 * parseInt($('#spinner').text()));
+    var intMod = parseInt($('#spinner2').text());
+    var level =  parseInt($('#spinner').text());
+    console.log(intMod + " " + level);
+    var targetHP = 2 + intMod + (5 * level);
     
     returnstring = targetHP;
     returnstring = returnstring + " (" + $('#spinner').text() + "d8";
