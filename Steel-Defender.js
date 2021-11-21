@@ -37,7 +37,7 @@ var mmCRValues = {
  
  var creatureStats = [];
  var creatureCR = 0;
- var race_modifiers = [2, 1, 2, -3, 0, -2];
+ var race_modifiers = [0, 0, 0, 0, 0, 0];
 
 function DoTheThing(){ 
     $("#DivContent").load("StatBlocks/steel_defender.mm", function(){
