@@ -35,11 +35,9 @@
         $("#" + spinnerid).spinner({ min: minval, max: maxval }).val(initvalue);
     }
 
-    $( function() {
-    createButton.click( function( event ) {
-            $("#DivContent").empty();
-            DoTheThing(); 
-        });
+    $( "createButton" ).click( function( event ) {
+        $("#DivContent").empty();
+        DoTheThing(); 
     });
 
     $(document).ready(function(){  
