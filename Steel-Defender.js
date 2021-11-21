@@ -54,8 +54,15 @@ function DoTheThing(){
         $('#mmSenses').text("darkvision 60 ft., passive Perception +" + (profMod * 2));
         $('#mmSkills').append("Athletics +" + (2 + profMod) + ", Perception +" + (2 * profMod));
         $('#mmSaves').append("Dex +" + (1 + profMod) + ", Con +" + (2 + profMod));
-        $('#mmAttacks').append("<property-block> <h4>Force-Empowered Rend.</h4><p></p></property-block>");        
-        $('#mmAttacks').append("<property-block> <h4>Repair (3/Day).</h4><p></p></property-block>");
+        $('#mmAttacks').append("<property-block> <h4>Force-Empowered Rend.</h4><p><i>Melee Weapon Attack:</i>+" + (profMod + intMod) +" to hit, reach 5 ft., one target you can see. <i>Hit:</i> 1d8 + " + profMod + " force damage.</p></property-block>");        
+        $('#mmAttacks').append("<property-block> <h4>Repair (3/Day).</h4><p>The magical mechanisms inside the defender restore 2d8 + " + profMod + " hit points to itself or to one construct or object within 5 feet of it.</p></property-block>");
+
+        if (level < 15){
+            $('#mmReactions').append("<property-block><h4>Deflect Attack.</h4><p>The defender imposes disadvantage on the attack roll of one creature it can see that is within 5 feet of it, provided the attack roll is against a creature other than the defender.</p></property-block>");
+        } else {
+            $('#mmAC').text("17");
+            $('#mmReactions').append("<property-block><h4>Deflect Attack.</h4><p>The defender imposes disadvantage on the attack roll of one creature it can see that is within 5 feet of it, provided the attack roll is against a creature other than the defender. The attacking creature takes 1d4 + " + intMod + " force damage.</p></property-block>");
+        }
     });
 }
 

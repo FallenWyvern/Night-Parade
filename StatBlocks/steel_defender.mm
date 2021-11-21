@@ -72,10 +72,6 @@
     </div>      
 
     <h3>Reactions</h3>    
-    <div id = 'mmReactions'>
-      <property-block>        
-                  <h4>Deflect Attack.</h4>
-                  <p>The defender imposes disadvantage on the attack roll of one creature it can see that is within 5 feet of it, provided the attack roll is against a creature other than the defender.</p>        
-      </property-block>      
+    <div id = 'mmReactions'>      
     </div>
   </stat-block>
