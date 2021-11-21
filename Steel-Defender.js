@@ -46,8 +46,8 @@ function DoTheThing(){
 }
 
 function HitPoints(){
-    var targetHP = 2 + ($('#spinner2').text()) + (5 * $('#spinner').text());
-    var currentHP = 0;
+    var targetHP = parseInt(2 + ($('#spinner2').text()) + (5 * $('#spinner').text()));
+    var currentHP = targetHP;
     var lastValue = 1000;
     var currentMultiplier = 0;
     var dieSize = 8;
